@@ -20,15 +20,15 @@ const btn = 'cursor-pointer rounded-[2px] px-1 -mx-1 text-ink-2 hover:text-green
     <p class="rise mt-4 max-w-[38rem] text-[1.125rem] text-ink-2" style="--i:1">{t.postsIntro}</p>
 
     <div class="rise mt-10 space-y-2 text-[0.95rem]" style="--i:2" data-filters>
-      <div class="grid gap-x-6 sm:grid-cols-[6rem_1fr]">
-        <span class="sc text-ink-3">{t.filterKind}</span>
+      <div class="row">
+        <span class="hang sc text-ink-3">{t.filterKind}</span>
         <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
         <button type="button" class={btn} data-kind="" aria-pressed="true">{t.filterAll}</button>
         {presentKinds.map((k) => <button type="button" class={btn} data-kind={k} aria-pressed="false">{t.kindsPlural[k]}</button>)}
         </p>
       </div>
-      <div class="grid gap-x-6 sm:grid-cols-[6rem_1fr]">
-        <span class="sc text-ink-3">{t.filterTag}</span>
+      <div class="row">
+        <span class="hang sc text-ink-3">{t.filterTag}</span>
         <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
         {tags.map((tag) => <button type="button" class={`${btn} italic`} data-tag={tag} aria-pressed="false">{tag}</button>)}
         </p>

@@ -1,12 +1,13 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getPosts, postHref } from '../lib/posts';
+import { ui } from '../lib/ui';
 
 export async function GET(context: APIContext) {
   const posts = await getPosts('en');
   return rss({
-    title: 'Simón Gómez Arango',
-    description: 'Posts on backend systems, infrastructure and engineering leadership.',
+    title: ui.en.name,
+    description: ui.en.siteDescription,
     site: context.site!,
     items: posts.map((p) => ({
       title: p.data.title,

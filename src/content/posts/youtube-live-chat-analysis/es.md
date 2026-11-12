@@ -7,7 +7,7 @@ El chat en vivo de una transmisión popular de YouTube es un pequeño torrente: 
 
 ## Arquitectura
 
-![Flujo de datos: YouTube → recolector en EC2 → Kinesis Data Streams, que alimenta a Flink para consultas en vivo y a Firehose → S3 para almacenamiento](./architecture.png)
+![Flujo de datos: YouTube → recolector en EC2 → Kinesis Data Streams, que alimenta a Flink para consultas en vivo y a Firehose → S3 para almacenamiento](./architecture.svg)
 
 - **Recolector (EC2, Python/Flask).** Un servicio HTTP pequeño recibe el ID de una transmisión y empieza a leer su chat con `pytchat`, enviando cada mensaje a Kinesis con `boto3`.
 - **Kinesis Data Streams** es el único punto de ingesta. Todo lo demás lee de ahí, así que agregar un consumidor nunca toca el recolector.

@@ -14,7 +14,6 @@ Personal site of Simón Gómez Arango. Astro (static) + Tailwind v4, deployed to
    date: 2026-11-11
    tags: [Go, GCP]
    featured: false      # true → shows under "Selected work" on the home page
-   cover: ./cover.png   # optional, image next to the file
    repo: https://github.com/…   # optional, string or list
    demo: https://…      # optional
    video: https://youtu.be/…    # optional (YouTube or Google Drive)
@@ -38,4 +37,4 @@ Vocabulary lives in `GLOSSARY.md`; product context in `PRODUCT.md`.
 | `pnpm check` | type-check |
 | `pnpm test` | unit tests (`node --test`) |
 
-Requires Node 24 (`.nvmrc`). Drop `public/cv.pdf` in to show the CV link.
+Requires Node ≥ 22.23 (`.nvmrc` pins 24). Drop `public/cv.pdf` in to show the CV link. Set `PUBLIC_CF_BEACON_TOKEN` in the Cloudflare build environment to enable Web Analytics.

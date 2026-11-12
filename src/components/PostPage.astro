@@ -1,37 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
-import { renderPost, type LocalPost } from '../lib/posts';
-import { formatDate, formatPeriod, type Locale } from '../lib/i18n';
+import { render } from 'astro:content';
+import type { LocalPost } from '../lib/posts';
+import { formatDate, formatPeriod, localePrefix, type Locale } from '../lib/i18n';
 import { ui } from '../lib/ui';
-import { embedUrl } from '../lib/embed';
 
 interface Props { post: LocalPost; locale: Locale }
 const { post, locale } = Astro.props;
 const t = ui[locale];
 const { data } = post;
-const { Content, headings } = await renderPost(post);
+const { Content, headings } = await render(post.entry);
 const toc = headings.filter((h) => h.depth === 2);
-const home = locale === 'es' ? '/es/' : '/';
+const home = `${localePrefix(locale)}/`;
 const links = [
   ...data.repo.map((url, i) => ({ label: data.repo.length > 1 ? `${t.code} ${i + 1}` : t.code, url })),
   ...(data.demo ? [{ label: t.demo, url: data.demo }] : []),
+  ...(data.video ? [{ label: t.video, url: data.video }] : []),
 ];
 ---
 
 <Base locale={locale} title={data.title} description={data.summary} og={`/og/${post.id}.png`} progress type="article">
   <article class="paper">
-    <p class="sc rise mt-16 text-[0.95rem] text-ink-3 lg:mt-24">
-      {t.kinds[data.kind]}
-      {!data.period && <> · <time datetime={data.date.toISOString()}>{formatDate(locale, data.date)}</time></>}
-      {data.company && <> · {data.company}</>}
-      {data.period && <> · <span class="tab">{formatPeriod(locale, data.period.start, data.period.end)}</span></>}
-    </p>
     <h1
-      class="mt-3 max-w-[22ch] text-[clamp(2.2rem,5.5vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.028em]"
+      class="mt-14 max-w-[22ch] lg:mt-20 text-[clamp(2.2rem,5.5vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.028em]"
       transition:name={`title-${post.id}`}
     >{data.title}</h1>
     <p class="rise mt-6 text-[1.25rem] leading-tight" style="--i:1">
       <a href={home} class="no-underline">{t.name}</a>
+    </p>
+    <p class="rise mt-2 text-[0.95rem] text-ink-3" style="--i:1">
+      <span class="sc">{t.kinds[data.kind]}</span>
+      {!data.period && <> · <time datetime={data.date.toISOString()}>{formatDate(locale, data.date)}</time></>}
+      {data.company && <> · {data.company}</>}
+      {data.period && <> · <span class="tab">{formatPeriod(locale, data.period.start, data.period.end)}</span></>}
     </p>
 
     {data.isFallback && locale === 'es' && (
@@ -66,14 +67,6 @@ const links = [
 
     <div class="body mt-10 text-[1.0625rem] leading-[1.7]" lang={data.isFallback ? 'en' : locale}>
       <Content />
-      {data.video && (
-        <figure>
-          <div class="aspect-video w-full border border-rule">
-            <iframe src={embedUrl(data.video)} title={data.title} loading="lazy" class="h-full w-full" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
-          </div>
-          <figcaption><span class="font-semibold text-ink">{t.video}.</span> {data.title}</figcaption>
-        </figure>
-      )}
     </div>
 
     <p class="mt-16 border-t border-rule pt-5"><a href={home} class="underline">← {t.back}</a></p>

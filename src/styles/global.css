@@ -82,14 +82,23 @@
   /* A numbered section: number and label sit in the margin column on desktop. */
   .section-head { display: flex; align-items: baseline; gap: 0.75rem; margin-top: 4.5rem; margin-bottom: 1.25rem; font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
   .section-head .n { color: var(--green); font-variant-numeric: lining-nums tabular-nums; min-width: 1.5ch; }
+  @media (max-width: 63.99rem) { .section-head .n:empty { display: none; } }
   @media (min-width: 64rem) {
     .section-head { margin-left: -12.5rem; }
     .section-head .n { width: 10rem; margin-right: 1.75rem; text-align: right; flex: none; }
   }
 
+  /* A row whose label hangs in the margin column on desktop, like a journal's running labels. */
+  .row { display: grid; gap: 0.15rem; }
+  @media (min-width: 64rem) {
+    .row { display: flex; align-items: baseline; }
+    .hang { flex: none; width: 10rem; margin-left: -12.5rem; margin-right: 2.5rem; text-align: right; }
+  }
+
   .cite { color: var(--green); text-decoration: none; font-variant-numeric: lining-nums; white-space: nowrap; }
   .cite:hover { text-decoration: underline; }
   .ref.is-cited { background: var(--green-soft); }
+  @media (prefers-reduced-motion: no-preference) { .ref { transition: background-color 0.3s; } }
 
   /* Post body: the paper's own typography rather than a stock prose theme. */
   .body { counter-reset: h2 fig; }
@@ -126,9 +135,11 @@
 }
 
 /* Reading progress: a green hairline driven by the scroll timeline, no JavaScript. */
+@media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: scroll()) {
   .progress { position: fixed; inset: 0 0 auto; height: 2px; background: var(--green); transform-origin: 0 50%; transform: scaleX(0); animation: grow linear both; animation-timeline: scroll(root); z-index: 50; }
   @keyframes grow { to { transform: scaleX(1); } }
+}
 }
 
 /* Title-page entrance: one orchestrated moment, from an already-legible default. */

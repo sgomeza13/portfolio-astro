@@ -1,18 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostEntry from './PostEntry.astro';
-import { getPosts, postHref } from '../lib/posts';
-import { formatPeriod, type Locale } from '../lib/i18n';
+import { getPosts, postHref, hasCv } from '../lib/posts';
+import { formatPeriod, localePrefix, monthYear, type Locale } from '../lib/i18n';
 import { ui, contact, type Segment } from '../lib/ui';
-import { existsSync } from 'node:fs';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = ui[locale];
-const prefix = locale === 'es' ? '/es' : '';
 const posts = await getPosts(locale);
 const byId = new Map(posts.map((p) => [p.id, p]));
-const hasCv = existsSync('public/cv.pdf');
 
 // Citations are numbered by first appearance in the abstract; a cite to a missing Post is dropped.
 const cited = [...new Set(t.abstractText.flatMap((s) => (typeof s === 'string' ? [] : [s.cite])))].filter((id) => byId.has(id));
@@ -26,7 +23,6 @@ const roles = posts
 const notes = posts.filter((p) => p.data.kind === 'note').slice(0, 3);
 const keywords = ['Java', 'Spring Boot', 'Go', 'Python', 'MySQL', 'RabbitMQ', 'Google Cloud', 'AWS'];
 
-const rows = t.fig1Rows.map((r) => ({ ...r, pct: r.before ? Math.round((r.after / r.before) * 100) : r.after }));
 let n = 0;
 const sec = () => ++n;
 ---
@@ -34,11 +30,11 @@ const sec = () => ++n;
 <Base locale={locale}>
   <div class="paper">
     <!-- Title page -->
-    <h1 class="rise mt-16 max-w-[15ch] text-[clamp(2.6rem,7vw,5rem)] font-semibold leading-[1.02] tracking-[-0.03em] lg:mt-24" style="--i:0">
+    <h1 class="rise mt-12 max-w-[15ch] text-[clamp(2.6rem,7vw,5rem)] font-semibold leading-[1.02] tracking-[-0.03em] lg:mt-16" style="--i:0">
       {t.title}
     </h1>
 
-    <div class="rise mt-8" style="--i:1">
+    <div class="rise mt-7" style="--i:1">
       <p class="text-[1.375rem] leading-tight">{t.name}<sup class="ml-0.5 text-green">1</sup></p>
       <p class="mt-2 text-[0.95rem] text-ink-2"><sup class="mr-1 text-green">1</sup>{t.affiliation}</p>
       <p class="mt-1 text-[0.95rem] text-ink-2 [overflow-wrap:anywhere]">
@@ -50,22 +46,22 @@ const sec = () => ++n;
       </p>
     </div>
 
-    <section aria-labelledby="abstract" class="rise wide mt-12 border-t border-ink pt-5 lg:mt-14 lg:grid lg:grid-cols-[minmax(0,42rem)_1fr] lg:gap-x-10" style="--i:2">
+    <section aria-labelledby="abstract" class="rise wide mt-10 border-t border-ink pt-5 lg:grid lg:grid-cols-[minmax(0,40rem)_minmax(10rem,1fr)] lg:gap-x-10" style="--i:2">
       <div>
-      <h2 id="abstract" class="sc mb-2 text-[1rem] font-semibold text-green">{t.abstract}</h2>
-      <p class="text-[1.125rem] leading-[1.65] hyphens-auto sm:text-justify" lang={locale}>
-        {abstract.map((s) =>
-          typeof s === 'string' ? s : (
-            <a href={`#ref-${s.cite}`} class="cite" data-cite={s.cite} aria-label={`[${citeNo(s.cite)}] ${byId.get(s.cite)!.data.title}`}>[{citeNo(s.cite)}]</a>
-          ),
-        )}
-      </p>
-      <p class="mt-4 text-[0.95rem] text-ink-2"><span class="sc font-semibold text-ink">{t.keywords}:</span> {keywords.join(' · ')}</p>
+        <h2 id="abstract" class="sc mb-2 text-[1rem] font-semibold text-green">{t.abstract}</h2>
+        <p class="text-[1.125rem] leading-[1.65] hyphens-auto" lang={locale}>
+          {abstract.map((s) =>
+            typeof s === 'string' ? s : (
+              <a href={`#ref-${s.cite}`} class="cite" data-cite={s.cite} aria-label={`[${citeNo(s.cite)}] ${byId.get(s.cite)!.data.title}`}>[{citeNo(s.cite)}]</a>
+            ),
+          )}
+        </p>
+        <p class="mt-4 text-[0.95rem] text-ink-2"><span class="sc font-semibold text-ink">{t.keywords}:</span> {keywords.join(' · ')}</p>
       </div>
       <!-- Margin notes: the abstract's references, beside the text on wide screens. -->
       <ol class="hidden self-start pt-8 text-[0.8rem] leading-snug text-ink-2 lg:block" aria-hidden="true">
         {cited.map((id, i) => (
-          <li class="ref mb-3 grid grid-cols-[1.75rem_1fr] rounded-[2px] transition-colors duration-300" data-ref={id}>
+          <li class="ref mb-3 grid grid-cols-[1.75rem_1fr] rounded-[2px]" data-ref={id}>
             <span class="tab text-green">[{i + 1}]</span>
             <a href={postHref(locale, id)} tabindex="-1" class="no-underline">{byId.get(id)!.data.title}</a>
           </li>
@@ -73,29 +69,26 @@ const sec = () => ++n;
       </ol>
     </section>
 
-    <!-- Figure 1: results drawn to scale -->
-    <figure class="rise wide mt-14" style="--i:3" aria-labelledby="fig1-cap">
-      <table class="w-full border-y border-ink text-left text-[0.95rem]">
-        <thead class="sc text-ink-3">
-          <tr class="border-b border-rule">
-            <th scope="col" class="py-2 pr-4 font-normal">&nbsp;</th>
-            <th scope="col" class="hidden py-2 pr-4 text-left font-normal sm:table-cell"><span class="inline-block h-px w-4 align-middle bg-bar"></span> {t.before} <span class="ml-3 inline-block h-0.5 w-4 align-middle bg-green"></span> {t.after}</th>
-            <th scope="col" class="py-2 text-right font-normal">&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr class="border-b border-rule last:border-0">
-              <th scope="row" class="w-[38%] py-3 pr-4 align-top font-normal leading-snug">{r.label}</th>
-              <td class="hidden py-3 pr-4 align-middle sm:table-cell" aria-hidden="true">
+    <!-- Figure 1: results drawn to scale, bars kept at every width so the caption stays true -->
+    <figure class="rise wide mt-10" style="--i:3" aria-labelledby="fig1-cap">
+      <div class="border-y border-ink">
+        <p class="sc border-b border-rule py-2 text-[0.85rem] text-ink-3" aria-hidden="true">
+          <span class="inline-block h-[3px] w-4 align-middle bg-bar"></span> {t.before}
+          <span class="ml-3 inline-block h-[3px] w-4 align-middle bg-green"></span> {t.after}
+        </p>
+        <dl>
+          {t.fig1Rows.map((r) => (
+            <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-4 border-b border-rule py-3 last:border-0 sm:grid-cols-[38%_1fr_7.5rem]">
+              <dt class="leading-snug">{r.label}</dt>
+              <dd class="order-last col-span-2 mt-2 sm:order-none sm:col-span-1 sm:mt-0 sm:self-center" aria-hidden="true">
                 <div class="h-[3px] w-full bg-bar"></div>
-                <div class="mt-1.5 h-[3px] bg-green" style={`width:${r.pct}%`}></div>
-              </td>
-              <td class="tab w-[7.5rem] py-3 text-right align-top whitespace-nowrap">{r.note}</td>
-            </tr>
+                <div class="mt-1.5 h-[3px] bg-green" style={`width:${Math.round((r.after / r.before) * 100)}%`}></div>
+              </dd>
+              <dd class="tab whitespace-nowrap text-right">{r.note}</dd>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </dl>
+      </div>
       <figcaption id="fig1-cap" class="mt-3 max-w-[42rem] text-[0.875rem] leading-normal text-ink-2">
         <span class="font-semibold text-ink">{t.figure} 1.</span> {t.fig1Caption}
       </figcaption>
@@ -108,28 +101,26 @@ const sec = () => ++n;
       </section>
     )}
 
-    {roles.length > 0 && (
-      <section class="section" aria-labelledby="s-exp">
-        <h2 id="s-exp" class="section-head"><span class="n">{sec()}</span>{t.sections.experience}</h2>
-        <ol>
-          {roles.map((r) => (
-            <li class="grid gap-x-6 border-t border-rule py-5 sm:grid-cols-[11rem_1fr]">
-              <p class="tab text-[0.95rem] text-ink-3">{formatPeriod(locale, r.data.period!.start, r.data.period!.end)}</p>
-              <div>
-                <h3 class="text-[1.2rem] font-semibold leading-snug">
-                  <a href={postHref(locale, r.id)} class="no-underline" transition:name={featured.includes(r) ? undefined : `title-${r.id}`}>{r.data.title}</a>
-                </h3>
-                <p class="text-ink-2">{r.data.company}. {r.data.summary}</p>
-              </div>
-            </li>
-          ))}
-          <li class="grid gap-x-6 border-y border-rule py-5 sm:grid-cols-[11rem_1fr]">
-            <p class="tab text-[0.95rem] text-ink-3">2025</p>
-            <p class="text-ink-2">{t.education}</p>
+    <section class="section" aria-labelledby="s-exp">
+      <h2 id="s-exp" class="section-head"><span class="n">{sec()}</span>{t.sections.experience}</h2>
+      <ol class="border-b border-rule">
+        {roles.map((r) => (
+          <li class="row border-t border-rule py-5">
+            <p class="hang tab text-[0.95rem] text-ink-3">{formatPeriod(locale, r.data.period!.start, r.data.period!.end)}</p>
+            <div>
+              <h3 class="text-[1.2rem] font-semibold leading-snug">
+                <a href={postHref(locale, r.id)} class="no-underline" transition:name={featured.includes(r) ? undefined : `title-${r.id}`}>{r.data.title}</a>
+              </h3>
+              <p class="text-ink-2">{r.data.company}. {r.data.summary}</p>
+            </div>
           </li>
-        </ol>
-      </section>
-    )}
+        ))}
+        <li class="row border-t border-rule py-5">
+          <p class="hang tab text-[0.95rem] text-ink-3">2025</p>
+          <p class="text-ink-2">{t.education}</p>
+        </li>
+      </ol>
+    </section>
 
     {notes.length > 0 && (
       <section class="section" aria-labelledby="s-notes">
@@ -140,12 +131,12 @@ const sec = () => ++n;
 
     <section class="section" aria-labelledby="s-methods">
       <h2 id="s-methods" class="section-head"><span class="n">{sec()}</span>{t.sections.methods}</h2>
-      <dl class="grid gap-x-6 sm:grid-cols-[11rem_1fr]">
+      <dl class="border-b border-rule">
         {t.methods.map(([k, v]) => (
-          <>
-            <dt class="sc border-t border-rule pt-3 text-[0.95rem] text-ink-3 sm:pb-3">{k}</dt>
-            <dd class="pb-3 sm:border-t sm:border-rule sm:pt-3">{v}</dd>
-          </>
+          <div class="row border-t border-rule py-3">
+            <dt class="hang sc text-[0.95rem] text-ink-3">{k}</dt>
+            <dd>{v}</dd>
+          </div>
         ))}
       </dl>
     </section>
@@ -157,24 +148,23 @@ const sec = () => ++n;
           {cited.map((id, i) => {
             const p = byId.get(id)!;
             return (
-              <li id={`ref-${id}`} class="ref grid grid-cols-[2.5rem_1fr] rounded-[2px] py-1.5 transition-colors duration-300">
+              <li id={`ref-${id}`} class="ref grid grid-cols-[2.5rem_1fr] rounded-[2px] py-1.5">
                 <span class="tab text-green">[{i + 1}]</span>
                 <span>
-                  {t.name}. <a href={postHref(locale, id)} class="italic">{p.data.title}</a>. {t.kinds[p.data.kind]},{' '}
-                  {new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(p.data.date)}.
+                  {t.name}. <a href={postHref(locale, id)} class="italic">{p.data.title}</a>. {t.kinds[p.data.kind]}, {monthYear(locale, p.data.date, 'long')}.
                 </span>
               </li>
             );
           })}
         </ol>
-        <p class="mt-6"><a href={`${prefix}/posts/`} class="underline">{t.allPosts} →</a></p>
+        <p class="mt-6"><a href={`${localePrefix(locale)}/posts/`} class="underline">{t.allPosts} →</a></p>
       </section>
     )}
   </div>
 </Base>
 
 <script>
-  // Hovering or focusing a citation lights up its reference entry.
+  // Hovering or focusing a citation lights up its reference entries.
   const wire = () => {
     document.querySelectorAll<HTMLAnchorElement>('a.cite').forEach((a) => {
       const refs = document.querySelectorAll(`#ref-${a.dataset.cite}, [data-ref="${a.dataset.cite}"]`);

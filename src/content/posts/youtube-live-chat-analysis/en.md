@@ -5,7 +5,6 @@ kind: project
 date: 2023-11-24
 tags: [AWS, Kinesis, Apache Flink, S3, Python, Streaming]
 featured: true
-cover: ./architecture.png
 repo: https://github.com/sgomeza13/YoutubeLiveChatAnalysis
 video: https://youtu.be/yiARRCB0lA4
 ---
@@ -14,7 +13,7 @@ Live chat on a popular YouTube stream is a small firehose: bursty, unbounded, an
 
 ## Architecture
 
-![Data flow: YouTube → EC2 collector → Kinesis Data Streams, fanning out to Flink for live queries and to Firehose → S3 for storage](./architecture.png)
+![Data flow: YouTube → EC2 collector → Kinesis Data Streams, fanning out to Flink for live queries and to Firehose → S3 for storage](./architecture.svg)
 
 - **Collector (EC2, Python/Flask).** A small HTTP service takes a live-stream ID and starts pulling its chat with `pytchat`, pushing every message to Kinesis with `boto3`.
 - **Kinesis Data Streams** is the single ingestion point. Everything downstream reads from it, so adding a consumer never touches the collector.

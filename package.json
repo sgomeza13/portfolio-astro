@@ -17,7 +17,6 @@
     "@astrojs/markdown-remark": "^7.3.7",
     "@astrojs/rss": "^4.0.19",
     "@fontsource/source-serif-4": "^5.3.1",
-    "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.11",
     "satori": "^0.63.2",

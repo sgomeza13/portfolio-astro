@@ -3,6 +3,9 @@
 export const locales = ['en', 'es'] as const;
 export type Locale = (typeof locales)[number];
 
+/** '' for English, '/es' for Spanish: prepend to any site path. */
+export const localePrefix = (locale: Locale) => (locale === 'es' ? '/es' : '');
+
 /** Same page in the other locale. English is unprefixed, Spanish lives under /es/. */
 export function alternatePath(pathname: string, target: Locale): string {
   const bare = pathname.replace(/^\/es(?=\/|$)/, '') || '/';
@@ -21,13 +24,16 @@ export function localize<T extends { title: string; summary: string }>(
 
 const present: Record<Locale, string> = { en: 'Present', es: 'actualidad' };
 
+/** "Jan 2024" / "ene 2024"; month: 'long' gives "January 2024" / "enero 2024". */
+export function monthYear(locale: Locale, d: Date, month: 'short' | 'long' = 'short'): string {
+  return new Intl.DateTimeFormat(locale, { month, year: 'numeric', timeZone: 'UTC' })
+    .format(d)
+    .replace(/\./g, '')
+    .replace(/ de /, ' ');
+}
+
 export function formatPeriod(locale: Locale, start: Date, end?: Date): string {
-  const fmt = (d: Date) =>
-    new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric', timeZone: 'UTC' })
-      .format(d)
-      .replace(/\./g, '')
-      .replace(/ de /, ' ');
-  return `${fmt(start)} – ${end ? fmt(end) : present[locale]}`;
+  return `${monthYear(locale, start)} – ${end ? monthYear(locale, end) : present[locale]}`;
 }
 
 export function formatDate(locale: Locale, date: Date): string {

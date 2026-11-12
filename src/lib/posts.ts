@@ -1,8 +1,10 @@
-import { getCollection, render, type CollectionEntry } from 'astro:content';
-import { localize, type Locale } from './i18n';
+import { existsSync } from 'node:fs';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { kinds } from '../content.config';
+import { localize, localePrefix, type Locale } from './i18n';
 
-export type Kind = CollectionEntry<'posts'>['data']['kind'];
-export const kinds: Kind[] = ['project', 'case-study', 'role', 'note'];
+export type Kind = (typeof kinds)[number];
+export { kinds };
 
 /** All Posts for a locale, newest first, with Spanish prose merged over English metadata. */
 export async function getPosts(locale: Locale) {
@@ -26,7 +28,7 @@ export async function getPosts(locale: Locale) {
 
 export type LocalPost = Awaited<ReturnType<typeof getPosts>>[number];
 
-export const renderPost = (post: LocalPost) => render(post.entry);
+export const postHref = (locale: Locale, id: string) => `${localePrefix(locale)}/posts/${id}/`;
 
-export const postHref = (locale: Locale, id: string) =>
-  `${locale === 'es' ? '/es' : ''}/posts/${id}/`;
+/** The CV link appears only once the PDF has been dropped into public/. */
+export const hasCv = existsSync('public/cv.pdf');

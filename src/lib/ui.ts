@@ -9,7 +9,9 @@ const en = {
   siteDescription:
     'Software engineer focused on backend systems and infrastructure. Engineering team lead at RevAIsor.',
   runningHead: 'Working paper',
-  nav: { posts: 'Posts', cv: 'CV', switchTo: 'Español', switchLabel: 'Leer en español' },
+  tagline: 'Software Engineer · Backend & Infrastructure',
+  skip: 'Skip to content',
+  nav: { label: 'Site', posts: 'Posts', cv: 'CV', switchTo: 'Español', switchLabel: 'Leer en español' },
   title: 'Building backends that hold up',
   affiliation: 'Software Engineer and Engineering Team Lead, RevAIsor · Medellín, Colombia',
   correspondence: 'Correspondence',
@@ -28,11 +30,11 @@ const en = {
   fig1Caption:
     'Results from my work at RevAIsor, 2024 – present. Each “before” is set to 100 and both bars are drawn to scale.',
   fig1Rows: [
-    { label: 'Critical endpoint wait time', after: 40, note: '≥ 60% shorter' },
-    { label: 'CI/CD build time', before: 30, after: 7, unit: 'min', note: '30 → 7 min' },
-    { label: 'Database query latency', after: 50, note: '50% lower' },
-    { label: 'Feature delivery time', after: 70, note: '30% shorter' },
-  ],
+    { label: 'Critical endpoint wait time', before: 100, after: 40, note: '≥ 60% shorter' },
+    { label: 'CI/CD build time', before: 30, after: 7, note: '30 → 7 min' },
+    { label: 'Database query latency', before: 100, after: 50, note: '50% lower' },
+    { label: 'Feature delivery time', before: 100, after: 70, note: '30% shorter' },
+  ] as { label: string; before: number; after: number; note: string }[],
   before: 'Before',
   after: 'After',
   sections: { work: 'Selected work', experience: 'Experience', notes: 'Notes', methods: 'Methods', references: 'References' },
@@ -71,7 +73,9 @@ const es: typeof en = {
   siteDescription:
     'Ingeniero de software enfocado en sistemas backend e infraestructura. Líder del equipo de ingeniería en RevAIsor.',
   runningHead: 'Documento de trabajo',
-  nav: { posts: 'Publicaciones', cv: 'CV', switchTo: 'English', switchLabel: 'Read in English' },
+  tagline: 'Ingeniero de Software · Backend e Infraestructura',
+  skip: 'Ir al contenido',
+  nav: { label: 'Sitio', posts: 'Publicaciones', cv: 'CV', switchTo: 'English', switchLabel: 'Read in English' },
   title: 'Construyendo backends que resisten',
   affiliation: 'Ingeniero de Software y Líder del Equipo de Ingeniería, RevAIsor · Medellín, Colombia',
   correspondence: 'Correspondencia',
@@ -89,12 +93,16 @@ const es: typeof en = {
   figure: 'Figura',
   fig1Caption:
     'Resultados de mi trabajo en RevAIsor, 2024 – actualidad. Cada “antes” equivale a 100 y ambas barras están a escala.',
-  fig1Rows: [
-    { label: 'Tiempo de espera de endpoints críticos', after: 40, note: '≥ 60% menos' },
-    { label: 'Tiempo de build de CI/CD', before: 30, after: 7, unit: 'min', note: '30 → 7 min' },
-    { label: 'Latencia de consultas a la base de datos', after: 50, note: '50% menos' },
-    { label: 'Tiempo de entrega de funcionalidades', after: 70, note: '30% menos' },
-  ],
+  // Same numbers as English; only the words change.
+  fig1Rows: en.fig1Rows.map((r, i) => ({
+    ...r,
+    ...[
+      { label: 'Tiempo de espera de endpoints críticos', note: '≥ 60% menos' },
+      { label: 'Tiempo de build de CI/CD', note: '30 → 7 min' },
+      { label: 'Latencia de consultas a la base de datos', note: '50% menos' },
+      { label: 'Tiempo de entrega de funcionalidades', note: '30% menos' },
+    ][i],
+  })),
   before: 'Antes',
   after: 'Después',
   sections: { work: 'Trabajo seleccionado', experience: 'Experiencia', notes: 'Notas', methods: 'Métodos', references: 'Referencias' },
