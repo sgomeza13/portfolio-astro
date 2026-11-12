@@ -23,13 +23,13 @@ export const GET: APIRoute = async ({ props }) => {
   const { title, kind } = props as { title: string; kind: string };
   const [regular, semibold] = await Promise.all([font(400), font(600)]);
   const svg = await satori(
-    h('div', { width: '100%', height: '100%', display: 'flex', flexDirection: 'column', background: '#fbfbf8', color: '#161a17', padding: '64px 80px', fontFamily: 'Serif' }, [
-      h('div', { display: 'flex', justifyContent: 'space-between', fontSize: 24, color: '#6a726c', borderBottom: '1px solid #d9ddd8', paddingBottom: 18 }, [
+    h('div', { width: 1200, height: 630, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#fbfbf8', color: '#161a17', padding: '64px 80px', fontFamily: 'Serif' }, [
+      h('div', { display: 'flex', width: 1040, justifyContent: 'space-between', fontSize: 24, color: '#6a726c', borderBottom: '1px solid #d9ddd8', paddingBottom: 18 }, [
         h('span', {}, ui.en.name),
         h('span', { color: '#2f5d46' }, kind),
       ]),
-      h('div', { display: 'flex', flex: 1, alignItems: 'center', fontSize: title.length > 48 ? 64 : 80, fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1.05 }, title),
-      h('div', { display: 'flex', borderTop: '2px solid #161a17', paddingTop: 18, fontSize: 24, color: '#4c544e' }, 'Software Engineer · Backend & Infrastructure'),
+      h('div', { display: 'flex', width: 920, fontSize: title.length > 48 ? 64 : 80, fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1.05 }, title),
+      h('div', { display: 'flex', width: 1040, borderTop: '2px solid #161a17', paddingTop: 18, fontSize: 24, color: '#4c544e' }, 'Software Engineer · Backend & Infrastructure'),
     ]),
     {
       width: 1200,
