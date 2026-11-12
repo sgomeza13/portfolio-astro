@@ -1,0 +1,137 @@
+import type { Locale } from './i18n';
+import type { Kind } from './posts';
+
+// A citation segment points at a Post id; the page numbers it by order of first appearance.
+export type Segment = string | { cite: string };
+
+const en = {
+  name: 'Simón Gómez Arango',
+  siteDescription:
+    'Software engineer focused on backend systems and infrastructure. Engineering team lead at RevAIsor.',
+  runningHead: 'Working paper',
+  nav: { posts: 'Posts', cv: 'CV', switchTo: 'Español', switchLabel: 'Leer en español' },
+  title: 'Building backends that hold up',
+  affiliation: 'Software Engineer and Engineering Team Lead, RevAIsor · Medellín, Colombia',
+  correspondence: 'Correspondence',
+  abstract: 'Abstract',
+  abstractText: [
+    "I'm a software engineer focused on backend systems and the infrastructure they run on. Since January 2024 I've been building RevAIsor's AI audit and compliance platform in Java, Python and Go on Google Cloud, and for more than a year I've led its engineering team ",
+    { cite: 'revaisor' },
+    '. That work cut critical endpoint wait times by at least 60%, CI builds from 30 to 7 minutes and database query latency by half (Fig. 1). On my own time I build streaming pipelines on AWS ',
+    { cite: 'youtube-live-chat-analysis' },
+    ' and small distributed systems in Go ',
+    { cite: 'stock-recommender' },
+    '.',
+  ] as Segment[],
+  keywords: 'Keywords',
+  figure: 'Figure',
+  fig1Caption:
+    'Results from my work at RevAIsor, 2024 – present. Each “before” is set to 100 and both bars are drawn to scale.',
+  fig1Rows: [
+    { label: 'Critical endpoint wait time', after: 40, note: '≥ 60% shorter' },
+    { label: 'CI/CD build time', before: 30, after: 7, unit: 'min', note: '30 → 7 min' },
+    { label: 'Database query latency', after: 50, note: '50% lower' },
+    { label: 'Feature delivery time', after: 70, note: '30% shorter' },
+  ],
+  before: 'Before',
+  after: 'After',
+  sections: { work: 'Selected work', experience: 'Experience', notes: 'Notes', methods: 'Methods', references: 'References' },
+  education: 'B.Sc. Computer Science, EAFIT University, 2025. Full scholarship; GPA 4.19 / 5.0.',
+  methods: [
+    ['Languages', 'Java, Go, Python, TypeScript, SQL'],
+    ['Backend', 'Spring Boot, Node.js, Django, Flask, REST, multi-tenant systems, RabbitMQ'],
+    ['Data', 'MySQL, PostgreSQL, Firestore, CockroachDB'],
+    ['Cloud and delivery', 'Google Cloud, AWS, Docker, serverless, CI/CD'],
+    ['Interfaces', 'Next.js, React, htmx'],
+  ],
+  allPosts: 'All posts',
+  kinds: { project: 'Project', 'case-study': 'Case study', role: 'Role', note: 'Note' } as Record<Kind, string>,
+  kindsPlural: { project: 'Projects', 'case-study': 'Case studies', role: 'Roles', note: 'Notes' } as Record<Kind, string>,
+  postsTitle: 'Posts',
+  postsIntro: 'Everything I have written up: projects, case studies, roles and notes.',
+  filterAll: 'All',
+  filterKind: 'Kind',
+  filterTag: 'Tag',
+  noMatch: 'No posts match this filter.',
+  clearFilter: 'Clear filter',
+  contents: 'Contents',
+  code: 'Code',
+  video: 'Video',
+  demo: 'Demo',
+  fallback: '',
+  back: 'Back to the paper',
+  colophon: 'Set in Source Serif 4 and JetBrains Mono. Built with Astro and served from Cloudflare.',
+  revised: 'Revised',
+  notFound: 'This page is not in the paper.',
+  notFoundBack: 'Return to the first page',
+};
+
+const es: typeof en = {
+  ...en,
+  siteDescription:
+    'Ingeniero de software enfocado en sistemas backend e infraestructura. Líder del equipo de ingeniería en RevAIsor.',
+  runningHead: 'Documento de trabajo',
+  nav: { posts: 'Publicaciones', cv: 'CV', switchTo: 'English', switchLabel: 'Read in English' },
+  title: 'Construyendo backends que resisten',
+  affiliation: 'Ingeniero de Software y Líder del Equipo de Ingeniería, RevAIsor · Medellín, Colombia',
+  correspondence: 'Correspondencia',
+  abstract: 'Resumen',
+  abstractText: [
+    'Soy ingeniero de software enfocado en sistemas backend y en la infraestructura sobre la que corren. Desde enero de 2024 construyo la plataforma de auditoría y cumplimiento de IA de RevAIsor en Java, Python y Go sobre Google Cloud, y desde hace más de un año lidero su equipo de ingeniería ',
+    { cite: 'revaisor' },
+    '. Ese trabajo redujo los tiempos de espera de endpoints críticos en al menos un 60%, los builds de CI de 30 a 7 minutos y la latencia de consultas a la mitad (Fig. 1). En mi tiempo libre construyo pipelines de streaming en AWS ',
+    { cite: 'youtube-live-chat-analysis' },
+    ' y pequeños sistemas distribuidos en Go ',
+    { cite: 'stock-recommender' },
+    '.',
+  ],
+  keywords: 'Palabras clave',
+  figure: 'Figura',
+  fig1Caption:
+    'Resultados de mi trabajo en RevAIsor, 2024 – actualidad. Cada “antes” equivale a 100 y ambas barras están a escala.',
+  fig1Rows: [
+    { label: 'Tiempo de espera de endpoints críticos', after: 40, note: '≥ 60% menos' },
+    { label: 'Tiempo de build de CI/CD', before: 30, after: 7, unit: 'min', note: '30 → 7 min' },
+    { label: 'Latencia de consultas a la base de datos', after: 50, note: '50% menos' },
+    { label: 'Tiempo de entrega de funcionalidades', after: 70, note: '30% menos' },
+  ],
+  before: 'Antes',
+  after: 'Después',
+  sections: { work: 'Trabajo seleccionado', experience: 'Experiencia', notes: 'Notas', methods: 'Métodos', references: 'Referencias' },
+  education: 'Pregrado en Ciencias de la Computación, Universidad EAFIT, 2025. Beca completa; promedio 4.19 / 5.0.',
+  methods: [
+    ['Lenguajes', 'Java, Go, Python, TypeScript, SQL'],
+    ['Backend', 'Spring Boot, Node.js, Django, Flask, REST, sistemas multi-tenant, RabbitMQ'],
+    ['Datos', 'MySQL, PostgreSQL, Firestore, CockroachDB'],
+    ['Nube y entrega', 'Google Cloud, AWS, Docker, serverless, CI/CD'],
+    ['Interfaces', 'Next.js, React, htmx'],
+  ],
+  allPosts: 'Todas las publicaciones',
+  kinds: { project: 'Proyecto', 'case-study': 'Caso de estudio', role: 'Rol', note: 'Nota' },
+  kindsPlural: { project: 'Proyectos', 'case-study': 'Casos de estudio', role: 'Roles', note: 'Notas' },
+  postsTitle: 'Publicaciones',
+  postsIntro: 'Todo lo que he documentado: proyectos, casos de estudio, roles y notas.',
+  filterAll: 'Todo',
+  filterKind: 'Tipo',
+  filterTag: 'Etiqueta',
+  noMatch: 'Ninguna publicación coincide con este filtro.',
+  clearFilter: 'Quitar filtro',
+  contents: 'Contenido',
+  code: 'Código',
+  video: 'Video',
+  demo: 'Demo',
+  fallback: 'Esta publicación solo está disponible en inglés por ahora.',
+  back: 'Volver al documento',
+  colophon: 'Compuesto en Source Serif 4 y JetBrains Mono. Hecho con Astro y servido desde Cloudflare.',
+  revised: 'Revisado',
+  notFound: 'Esta página no está en el documento.',
+  notFoundBack: 'Volver a la primera página',
+};
+
+export const ui: Record<Locale, typeof en> = { en, es };
+
+export const contact = {
+  email: 'simongomezarango123@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/sim%C3%B3n-g%C3%B3mez-arango-a605a32b2/',
+  github: 'https://github.com/sgomeza13',
+};

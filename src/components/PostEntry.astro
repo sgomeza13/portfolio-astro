@@ -1,0 +1,36 @@
+---
+import type { LocalPost } from '../lib/posts';
+import { postHref } from '../lib/posts';
+import type { Locale } from '../lib/i18n';
+import { ui } from '../lib/ui';
+
+interface Props {
+  post: LocalPost;
+  locale: Locale;
+  /** Only one element per page may carry a given transition name. */
+  morph?: boolean;
+  heading?: 'h3' | 'h2';
+}
+
+const { post, locale, morph = false, heading: H = 'h3' } = Astro.props;
+const t = ui[locale];
+const { data } = post;
+const year = new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric', timeZone: 'UTC' })
+  .format(data.date)
+  .replace('.', '');
+---
+
+<article class="group relative border-t border-rule py-6">
+  <p class="sc mb-1.5 text-[0.9rem] text-ink-3">
+    {t.kinds[data.kind]} · <time datetime={data.date.toISOString()}>{year}</time>{data.company && <> · {data.company}</>}
+  </p>
+  <H class="text-[1.375rem] font-semibold leading-snug tracking-[-0.012em]">
+    <a
+      href={postHref(locale, post.id)}
+      class="no-underline after:absolute after:inset-0 group-hover:text-green"
+      transition:name={morph ? `title-${post.id}` : undefined}
+    >{data.title}</a>
+  </H>
+  <p class="mt-2 text-ink-2">{data.summary}</p>
+  {data.tags.length > 0 && <p class="mt-2 text-[0.875rem] italic text-ink-3">{data.tags.join(', ')}</p>}
+</article>

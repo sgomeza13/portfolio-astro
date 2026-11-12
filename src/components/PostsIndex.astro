@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import PostEntry from './PostEntry.astro';
+import { getPosts, kinds } from '../lib/posts';
+import type { Locale } from '../lib/i18n';
+import { ui } from '../lib/ui';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = ui[locale];
+const posts = await getPosts(locale);
+const presentKinds = kinds.filter((k) => posts.some((p) => p.data.kind === k));
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort((a, b) => a.localeCompare(b));
+const btn = 'cursor-pointer rounded-[2px] px-1 -mx-1 text-ink-2 hover:text-green aria-pressed:text-green aria-pressed:underline aria-pressed:decoration-1 aria-pressed:underline-offset-4';
+---
+
+<Base locale={locale} title={t.postsTitle} description={t.postsIntro}>
+  <div class="paper">
+    <h1 class="rise mt-16 text-[clamp(2.4rem,6vw,4rem)] font-semibold leading-[1.05] tracking-[-0.03em] lg:mt-24">{t.postsTitle}</h1>
+    <p class="rise mt-4 max-w-[38rem] text-[1.125rem] text-ink-2" style="--i:1">{t.postsIntro}</p>
+
+    <div class="rise mt-10 space-y-2 text-[0.95rem]" style="--i:2" data-filters>
+      <div class="grid gap-x-6 sm:grid-cols-[6rem_1fr]">
+        <span class="sc text-ink-3">{t.filterKind}</span>
+        <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <button type="button" class={btn} data-kind="" aria-pressed="true">{t.filterAll}</button>
+        {presentKinds.map((k) => <button type="button" class={btn} data-kind={k} aria-pressed="false">{t.kindsPlural[k]}</button>)}
+        </p>
+      </div>
+      <div class="grid gap-x-6 sm:grid-cols-[6rem_1fr]">
+        <span class="sc text-ink-3">{t.filterTag}</span>
+        <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        {tags.map((tag) => <button type="button" class={`${btn} italic`} data-tag={tag} aria-pressed="false">{tag}</button>)}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-8 border-b border-rule" data-list>
+      {posts.map((p) => (
+        <div data-kind={p.data.kind} data-tags={JSON.stringify(p.data.tags)}>
+          <PostEntry post={p} locale={locale} heading="h2" morph />
+        </div>
+      ))}
+    </div>
+    <p class="mt-8 hidden text-ink-2" data-empty>
+      {t.noMatch} <button type="button" class="cursor-pointer underline hover:text-green" data-clear>{t.clearFilter}</button>
+    </p>
+  </div>
+</Base>
+
+<script>
+  // Filters live in the URL (?kind=role&tag=Go) so a filtered list can be linked.
+  const wire = () => {
+    const root = document.querySelector('[data-filters]');
+    if (!root) return;
+    const items = [...document.querySelectorAll<HTMLElement>('[data-list] > [data-kind]')];
+    const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+    const apply = () => {
+      const q = new URLSearchParams(location.search);
+      const kind = q.get('kind') ?? '';
+      const tag = q.get('tag') ?? '';
+      root.querySelectorAll<HTMLButtonElement>('[data-kind]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kind === kind)));
+      root.querySelectorAll<HTMLButtonElement>('[data-tag]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tag === tag)));
+      let shown = 0;
+      for (const el of items) {
+        const ok = (!kind || el.dataset.kind === kind) && (!tag || JSON.parse(el.dataset.tags!).includes(tag));
+        el.hidden = !ok;
+        shown += Number(ok);
+      }
+      empty.hidden = shown > 0;
+      empty.classList.toggle('hidden', shown > 0);
+    };
+    const set = (key: string, value: string) => {
+      const q = new URLSearchParams(location.search);
+      if (value && q.get(key) !== value) q.set(key, value); else q.delete(key);
+      history.replaceState(null, '', `${location.pathname}${q.size ? `?${q}` : ''}`);
+      apply();
+    };
+    root.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('button');
+      if (!b) return;
+      if (b.dataset.kind !== undefined) set('kind', b.dataset.kind);
+      else if (b.dataset.tag) set('tag', b.dataset.tag);
+    });
+    document.querySelector('[data-clear]')?.addEventListener('click', () => {
+      history.replaceState(null, '', location.pathname);
+      apply();
+    });
+    apply();
+  };
+  document.addEventListener('astro:page-load', wire);
+</script>

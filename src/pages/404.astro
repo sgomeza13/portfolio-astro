@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui } from '../lib/ui';
+const t = ui.en;
+---
+<Base locale="en" title="404">
+  <div class="paper">
+    <p class="sc mt-24 text-green">404</p>
+    <h1 class="mt-2 text-[clamp(2.2rem,5vw,3.5rem)] font-semibold leading-tight tracking-[-0.025em]">{t.notFound}</h1>
+    <p class="mt-6"><a href="/" class="underline">{t.notFoundBack}</a> · <a href="/es/" class="underline" lang="es">{ui.es.notFoundBack}</a></p>
+  </div>
+</Base>

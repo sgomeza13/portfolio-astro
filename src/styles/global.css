@@ -1,0 +1,139 @@
+@import 'tailwindcss';
+
+/* Journal Paper: offset paper, ink, and one bottle-green second ink reserved for live things. */
+:root {
+  --paper: #fbfbf8;
+  --ink: #161a17;
+  --ink-2: #4c544e; /* secondary text, 7.6:1 on paper */
+  --ink-3: #6a726c; /* captions and metadata, 4.8:1 on paper */
+  --rule: #d9ddd8;
+  --green: #2f5d46; /* 7.4:1 on paper */
+  --green-soft: #e3ece6;
+  --bar: #c4cbc5;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121614;
+    --ink: #e4e8e3;
+    --ink-2: #b3bbb4;
+    --ink-3: #8d968f;
+    --rule: #2b322d;
+    --green: #8fc3a5;
+    --green-soft: #1c2a22;
+    --bar: #3a433c;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-bar: var(--bar);
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.6;
+    font-variant-numeric: oldstyle-nums proportional-nums;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    scrollbar-color: var(--bar) transparent;
+    scroll-padding-top: 4rem;
+  }
+  @media (min-width: 64rem) {
+    html { font-size: 18px; }
+  }
+  ::selection { background: var(--green); color: var(--paper); }
+  :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 1px; }
+  a { text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: var(--rule); transition: color 0.2s, text-decoration-color 0.2s; }
+  a:hover { color: var(--green); text-decoration-color: currentColor; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+}
+
+@layer components {
+  /* Small caps labels: the paper's section labels, running head and margin notes. */
+  .sc { font-variant-caps: all-small-caps; letter-spacing: 0.06em; font-variant-numeric: lining-nums; }
+  .tab { font-variant-numeric: lining-nums tabular-nums; }
+
+  /* The page grid: a margin column for labels and numbers, a main column at reading measure. */
+  .paper { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 2.5rem; max-width: 70rem; margin-inline: auto; padding-inline: 1.25rem; }
+  .paper > * { grid-column: 1; }
+  @media (min-width: 64rem) {
+    .paper { grid-template-columns: 10rem minmax(0, 42rem) minmax(0, 1fr); padding-inline: 2.5rem; }
+    .paper > * { grid-column: 2 / 3; }
+    .paper > .wide { grid-column: 2 / 4; }
+    .paper > .full { grid-column: 1 / 4; }
+    .margin { grid-column: 1; grid-row: span 1; }
+  }
+
+  /* A numbered section: number and label sit in the margin column on desktop. */
+  .section-head { display: flex; align-items: baseline; gap: 0.75rem; margin-top: 4.5rem; margin-bottom: 1.25rem; font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+  .section-head .n { color: var(--green); font-variant-numeric: lining-nums tabular-nums; min-width: 1.5ch; }
+  @media (min-width: 64rem) {
+    .section-head { margin-left: -12.5rem; }
+    .section-head .n { width: 10rem; margin-right: 1.75rem; text-align: right; flex: none; }
+  }
+
+  .cite { color: var(--green); text-decoration: none; font-variant-numeric: lining-nums; white-space: nowrap; }
+  .cite:hover { text-decoration: underline; }
+  .ref.is-cited { background: var(--green-soft); }
+
+  /* Post body: the paper's own typography rather than a stock prose theme. */
+  .body { counter-reset: h2 fig; }
+  .body > * + * { margin-top: 1.1em; }
+  .body h2 { counter-increment: h2; margin-top: 2.6em; font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+  .body h2::before { content: counter(h2); color: var(--green); font-variant-numeric: lining-nums tabular-nums; margin-right: 0.75rem; }
+  @media (min-width: 64rem) {
+    .body h2::before { display: inline-block; width: 10rem; margin-left: -12.5rem; margin-right: 2.5rem; text-align: right; }
+  }
+  .body h3 { margin-top: 2em; font-weight: 600; font-style: italic; }
+  .body h2 + *, .body h3 + * { margin-top: 0.6em; }
+  .body ul { padding-left: 1.25rem; list-style: none; }
+  .body ul > li { position: relative; }
+  .body ul > li + li { margin-top: 0.5em; }
+  .body ul > li::before { content: ''; position: absolute; left: -1.1rem; top: 0.72em; width: 0.45rem; height: 1px; background: var(--ink-3); }
+  .body ol { padding-left: 1.5rem; list-style: decimal; }
+  .body strong { font-weight: 600; }
+  .body em:only-child { color: var(--ink-3); }
+  .body a { text-decoration-line: underline; }
+  .body code:not(pre code) { font-family: var(--font-mono); font-size: 0.84em; padding: 0.1em 0.3em; background: var(--green-soft); border-radius: 2px; }
+  .body pre { font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.65; padding: 1.25rem 1.5rem; overflow-x: auto; border-block: 1px solid var(--rule); margin-block: 1.75em; }
+  .body pre.astro-code { background-color: transparent !important; }
+  @media (prefers-color-scheme: dark) {
+    .body pre.astro-code, .body pre.astro-code span { color: var(--shiki-dark) !important; }
+  }
+  .body figure { margin-block: 2.25em; }
+  .body figure img { width: 100%; height: auto; border: 1px solid var(--rule); }
+  .body figcaption { margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: var(--ink-2); }
+  .body figcaption .fig-n::before { content: var(--fig-label, 'Figure') ' '; }
+  .body figcaption .fig-n { font-weight: 600; color: var(--ink); }
+  .body figcaption .fig-n::after { content: '.'; }
+  .body blockquote { padding-left: 1.25rem; border-left: 1px solid var(--green); color: var(--ink-2); font-style: italic; }
+  .body hr { border: 0; border-top: 1px solid var(--rule); margin-block: 2.5em; }
+}
+
+/* Reading progress: a green hairline driven by the scroll timeline, no JavaScript. */
+@supports (animation-timeline: scroll()) {
+  .progress { position: fixed; inset: 0 0 auto; height: 2px; background: var(--green); transform-origin: 0 50%; transform: scaleX(0); animation: grow linear both; animation-timeline: scroll(root); z-index: 50; }
+  @keyframes grow { to { transform: scaleX(1); } }
+}
+
+/* Title-page entrance: one orchestrated moment, from an already-legible default. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+  @keyframes rise { from { opacity: 0.001; transform: translateY(0.6rem); filter: blur(3px); } }
+  ::view-transition-group(*) { animation-duration: 0.45s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+}

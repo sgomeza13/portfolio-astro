@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import { renderPost, type LocalPost } from '../lib/posts';
+import { formatDate, formatPeriod, type Locale } from '../lib/i18n';
+import { ui } from '../lib/ui';
+import { embedUrl } from '../lib/embed';
+
+interface Props { post: LocalPost; locale: Locale }
+const { post, locale } = Astro.props;
+const t = ui[locale];
+const { data } = post;
+const { Content, headings } = await renderPost(post);
+const toc = headings.filter((h) => h.depth === 2);
+const home = locale === 'es' ? '/es/' : '/';
+const links = [
+  ...data.repo.map((url, i) => ({ label: data.repo.length > 1 ? `${t.code} ${i + 1}` : t.code, url })),
+  ...(data.demo ? [{ label: t.demo, url: data.demo }] : []),
+];
+---
+
+<Base locale={locale} title={data.title} description={data.summary} og={`/og/${post.id}.png`} progress type="article">
+  <article class="paper">
+    <p class="sc rise mt-16 text-[0.95rem] text-ink-3 lg:mt-24">
+      {t.kinds[data.kind]}
+      {!data.period && <> · <time datetime={data.date.toISOString()}>{formatDate(locale, data.date)}</time></>}
+      {data.company && <> · {data.company}</>}
+      {data.period && <> · <span class="tab">{formatPeriod(locale, data.period.start, data.period.end)}</span></>}
+    </p>
+    <h1
+      class="mt-3 max-w-[22ch] text-[clamp(2.2rem,5.5vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.028em]"
+      transition:name={`title-${post.id}`}
+    >{data.title}</h1>
+    <p class="rise mt-6 text-[1.25rem] leading-tight" style="--i:1">
+      <a href={home} class="no-underline">{t.name}</a>
+    </p>
+
+    {data.isFallback && locale === 'es' && (
+      <p class="mt-6 border-y border-rule py-3 text-[0.95rem] text-ink-2" lang="es">{t.fallback}</p>
+    )}
+
+    <section class="rise mt-10 border-t border-ink pt-5" style="--i:2" aria-label={t.abstract}>
+      <h2 class="sc mb-2 text-[1rem] font-semibold text-green">{t.abstract}</h2>
+      <p class="text-[1.125rem] leading-[1.65]">{data.summary}</p>
+      {data.tags.length > 0 && (
+        <p class="mt-4 text-[0.95rem] text-ink-2"><span class="sc font-semibold text-ink">{t.keywords}:</span> {data.tags.join(' · ')}</p>
+      )}
+      {links.length > 0 && (
+        <p class="mt-1 text-[0.95rem] text-ink-2">
+          {links.map((l, i) => <>{i > 0 && ' · '}<a href={l.url} class="text-ink underline">{l.label}</a></>)}
+        </p>
+      )}
+    </section>
+
+    {toc.length > 1 && (
+      <nav class="margin hidden lg:block lg:row-span-[20]" aria-label={t.contents}>
+        <div class="sticky top-10 mt-10 text-right text-[0.85rem] leading-snug">
+          <p class="sc mb-3 text-ink-3">{t.contents}</p>
+          <ol class="space-y-2">
+            {toc.map((h, i) => (
+              <li><a href={`#${h.slug}`} class="toc-link block no-underline text-ink-2" data-slug={h.slug}><span class="tab mr-1.5 text-ink-3">{i + 1}</span>{h.text}</a></li>
+            ))}
+          </ol>
+        </div>
+      </nav>
+    )}
+
+    <div class="body mt-10 text-[1.0625rem] leading-[1.7]" lang={data.isFallback ? 'en' : locale}>
+      <Content />
+      {data.video && (
+        <figure>
+          <div class="aspect-video w-full border border-rule">
+            <iframe src={embedUrl(data.video)} title={data.title} loading="lazy" class="h-full w-full" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+          </div>
+          <figcaption><span class="font-semibold text-ink">{t.video}.</span> {data.title}</figcaption>
+        </figure>
+      )}
+    </div>
+
+    <p class="mt-16 border-t border-rule pt-5"><a href={home} class="underline">← {t.back}</a></p>
+  </article>
+</Base>
+
+<script>
+  // The section in view turns green in the margin table of contents.
+  const wire = () => {
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc-link')];
+    if (!links.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          links.forEach((l) => l.classList.toggle('text-green!', l.dataset.slug === e.target.id));
+        }
+      },
+      { rootMargin: '0px 0px -70% 0px' },
+    );
+    links.forEach((l) => {
+      const h = document.getElementById(l.dataset.slug!);
+      if (h) io.observe(h);
+    });
+    document.addEventListener('astro:before-swap', () => io.disconnect(), { once: true });
+  };
+  document.addEventListener('astro:page-load', wire);
+</script>
