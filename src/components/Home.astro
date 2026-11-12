@@ -21,7 +21,7 @@ const roles = posts
   .filter((p) => p.data.kind === 'role' && p.data.period)
   .sort((a, b) => b.data.period!.start.valueOf() - a.data.period!.start.valueOf());
 const notes = posts.filter((p) => p.data.kind === 'note').slice(0, 3);
-const keywords = ['Java', 'Spring Boot', 'Go', 'Python', 'MySQL', 'RabbitMQ', 'Google Cloud', 'AWS'];
+const keywords = ['Java', 'Spring Boot', 'Go', 'TypeScript', 'MySQL', 'RabbitMQ', 'Google Cloud', 'AWS'];
 
 let n = 0;
 const sec = () => ++n;
