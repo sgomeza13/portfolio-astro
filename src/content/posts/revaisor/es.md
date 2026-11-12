@@ -1,9 +1,9 @@
 ---
 title: Ingeniero de Software · Líder del Equipo de Ingeniería
-summary: Construyendo la plataforma de auditoría y cumplimiento de IA de RevAIsor, y liderando el equipo de ingeniería detrás de ella.
+summary: Construyendo la plataforma de gobernanza de IA de RevAIsor, y liderando el equipo de ingeniería detrás de ella.
 ---
 
-RevAIsor construye una plataforma para auditar sistemas de IA frente a marcos regulatorios como el AI Act de la Unión Europea. Entré como desarrollador full stack en enero de 2024 y llevo más de un año liderando el equipo de ingeniería, sin dejar de escribir código en el backend, la infraestructura y las interfaces.
+RevAIsor construye una plataforma de gobernanza de IA, alineada con marcos regulatorios como el AI Act de la Unión Europea. Entré como desarrollador full stack en enero de 2024 y llevo más de un año liderando el equipo de ingeniería, sin dejar de escribir código en el backend, la infraestructura y las interfaces.
 
 ## Liderando el equipo
 

@@ -1,6 +1,6 @@
 ---
 title: Software Engineer · Engineering Team Lead
-summary: Building RevAIsor's AI audit and compliance platform, and leading the engineering team behind it.
+summary: Building RevAIsor's AI governance platform, and leading the engineering team behind it.
 kind: role
 date: 2024-01-15
 company: RevAIsor
@@ -9,7 +9,7 @@ period:
 tags: [Java, Spring Boot, Python, Go, Next.js, MySQL, RabbitMQ, GCP]
 ---
 
-RevAIsor builds a platform for auditing AI systems against regulatory frameworks such as the EU AI Act. I joined as a full-stack developer in January 2024 and have led the engineering team for over a year, while still shipping code across the backend, the infrastructure and the interfaces.
+RevAIsor builds an AI governance platform, aligned with regulatory frameworks such as the EU AI Act. I joined as a full-stack developer in January 2024 and have led the engineering team for over a year, while still shipping code across the backend, the infrastructure and the interfaces.
 
 ## Leading the team
 

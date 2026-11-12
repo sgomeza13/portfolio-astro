@@ -17,7 +17,7 @@ const en = {
   correspondence: 'Correspondence',
   abstract: 'Abstract',
   abstractText: [
-    "I'm a software engineer focused on backend systems and the infrastructure they run on. Since January 2024 I've been designing, implementing and deploying RevAIsor's AI audit and compliance platform and its services in Java, TypeScript and Go on Google Cloud, and for more than a year I've led its engineering team ",
+    "I'm a software engineer focused on backend systems and the infrastructure they run on. Since January 2024 I've been designing, implementing and deploying RevAIsor's AI governance platform and its services in Java, TypeScript and Go on Google Cloud, and for more than a year I've led its engineering team ",
     { cite: 'revaisor' },
     '. That work cut critical endpoint wait times by at least 60%, CI builds from 30 to 7 minutes and database query latency by half (Fig. 1). On my own time I build streaming pipelines on AWS ',
     { cite: 'youtube-live-chat-analysis' },
@@ -81,7 +81,7 @@ const es: typeof en = {
   correspondence: 'Correspondencia',
   abstract: 'Resumen',
   abstractText: [
-    'Soy ingeniero de software enfocado en sistemas backend y en la infraestructura sobre la que corren. Desde enero de 2024 diseño, implemento y despliego la plataforma de auditoría y cumplimiento de IA de RevAIsor y sus servicios en Java, TypeScript y Go sobre Google Cloud, y desde hace más de un año lidero su equipo de ingeniería ',
+    'Soy ingeniero de software enfocado en sistemas backend y en la infraestructura sobre la que corren. Desde enero de 2024 diseño, implemento y despliego la plataforma de gobernanza de IA de RevAIsor y sus servicios en Java, TypeScript y Go sobre Google Cloud, y desde hace más de un año lidero su equipo de ingeniería ',
     { cite: 'revaisor' },
     '. Ese trabajo redujo los tiempos de espera de endpoints críticos en al menos un 60%, los builds de CI de 30 a 7 minutos y la latencia de consultas a la mitad (Fig. 1). En mi tiempo libre construyo pipelines de streaming en AWS ',
     { cite: 'youtube-live-chat-analysis' },
