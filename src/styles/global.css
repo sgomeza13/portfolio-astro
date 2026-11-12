@@ -126,6 +126,8 @@
   }
   .body figure { margin-block: 2.25em; }
   .body figure img { width: 100%; height: auto; border: 1px solid var(--rule); }
+  /* Drawn figures sit on the paper itself; only screenshots get a hairline edge. */
+  .body figure img[src$='.svg'] { border: 0; }
   .body figcaption { margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: var(--ink-2); }
   .body figcaption .fig-n::before { content: var(--fig-label, 'Figure') ' '; }
   .body figcaption .fig-n { font-weight: 600; color: var(--ink); }
