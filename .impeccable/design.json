@@ -1,289 +1,440 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-12T02:36:06.932484+00:00",
+  "generatedAt": "2026-11-21T15:50:22+00:00",
   "title": "Design System: Simón Gómez Arango",
   "extensions": {
     "colorMeta": {
-      "paper": {
+      "ground": {
         "role": "neutral",
-        "displayName": "Offset Paper",
+        "displayName": "Sign Ground",
+        "canonical": "#f5f2e9",
         "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
+          "oklch(15% 0.004 106.5)",
+          "oklch(26% 0.004 106.5)",
+          "oklch(37% 0.004 106.5)",
+          "oklch(48% 0.004 106.5)",
+          "oklch(60% 0.004 106.5)",
+          "oklch(71% 0.004 106.5)",
+          "oklch(83% 0.004 106.5)",
+          "oklch(95% 0.004 106.5)"
         ]
       },
       "ink": {
         "role": "neutral",
-        "displayName": "Ink",
+        "displayName": "Sign Black",
+        "canonical": "#12201b",
         "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(37% 0.000 89.9)",
+          "oklch(48% 0.000 89.9)",
+          "oklch(60% 0.000 89.9)",
+          "oklch(71% 0.000 89.9)",
+          "oklch(83% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
         ]
       },
       "ink-2": {
         "role": "neutral",
-        "displayName": "Second Ink",
+        "displayName": "Graphite",
+        "canonical": "#474746",
         "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
+          "oklch(15% 0.002 106.5)",
+          "oklch(26% 0.002 106.5)",
+          "oklch(37% 0.002 106.5)",
+          "oklch(48% 0.002 106.5)",
+          "oklch(60% 0.002 106.5)",
+          "oklch(71% 0.002 106.5)",
+          "oklch(83% 0.002 106.5)",
+          "oklch(95% 0.002 106.5)"
         ]
       },
       "ink-3": {
         "role": "neutral",
-        "displayName": "Faint Ink",
+        "displayName": "Slate",
+        "canonical": "#686866",
         "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
+          "oklch(15% 0.003 106.5)",
+          "oklch(26% 0.003 106.5)",
+          "oklch(37% 0.003 106.5)",
+          "oklch(48% 0.003 106.5)",
+          "oklch(60% 0.003 106.5)",
+          "oklch(71% 0.003 106.5)",
+          "oklch(83% 0.003 106.5)",
+          "oklch(95% 0.003 106.5)"
         ]
       },
       "rule": {
         "role": "neutral",
         "displayName": "Hairline",
+        "canonical": "#d6d6d1",
         "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
+          "oklch(15% 0.007 106.5)",
+          "oklch(26% 0.007 106.5)",
+          "oklch(37% 0.007 106.5)",
+          "oklch(48% 0.007 106.5)",
+          "oklch(60% 0.007 106.5)",
+          "oklch(71% 0.007 106.5)",
+          "oklch(83% 0.007 106.5)",
+          "oklch(95% 0.007 106.5)"
         ]
       },
-      "bar": {
+      "band": {
         "role": "neutral",
-        "displayName": "Bar Grey",
+        "displayName": "Sign Band",
+        "canonical": "#12201b",
         "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(37% 0.000 89.9)",
+          "oklch(48% 0.000 89.9)",
+          "oklch(60% 0.000 89.9)",
+          "oklch(71% 0.000 89.9)",
+          "oklch(83% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
         ]
       },
-      "green": {
+      "band-ink": {
+        "role": "neutral",
+        "displayName": "Band Ink",
+        "canonical": "#f5f2e9",
+        "tonalRamp": [
+          "oklch(15% 0.004 106.5)",
+          "oklch(26% 0.004 106.5)",
+          "oklch(37% 0.004 106.5)",
+          "oklch(48% 0.004 106.5)",
+          "oklch(60% 0.004 106.5)",
+          "oklch(71% 0.004 106.5)",
+          "oklch(83% 0.004 106.5)",
+          "oklch(95% 0.004 106.5)"
+        ]
+      },
+      "band-ink-2": {
+        "role": "neutral",
+        "displayName": "Band Grey",
+        "canonical": "#a9a9a5",
+        "tonalRamp": [
+          "oklch(15% 0.006 106.5)",
+          "oklch(26% 0.006 106.5)",
+          "oklch(37% 0.006 106.5)",
+          "oklch(48% 0.006 106.5)",
+          "oklch(60% 0.006 106.5)",
+          "oklch(71% 0.006 106.5)",
+          "oklch(83% 0.006 106.5)",
+          "oklch(95% 0.006 106.5)"
+        ]
+      },
+      "kind-project": {
         "role": "primary",
-        "displayName": "Bottle Green",
+        "displayName": "Signal Vermilion",
+        "canonical": "#9a412b",
         "tonalRamp": [
-          "oklch(15% 0.05 160)",
-          "oklch(26% 0.05 160)",
-          "oklch(37% 0.05 160)",
-          "oklch(48% 0.05 160)",
-          "oklch(60% 0.05 160)",
-          "oklch(72% 0.05 160)",
-          "oklch(84% 0.05 160)",
-          "oklch(95% 0.05 160)"
+          "oklch(15% 0.197 34.7)",
+          "oklch(26% 0.197 34.7)",
+          "oklch(37% 0.197 34.7)",
+          "oklch(48% 0.197 34.7)",
+          "oklch(60% 0.197 34.7)",
+          "oklch(71% 0.197 34.7)",
+          "oklch(83% 0.197 34.7)",
+          "oklch(95% 0.197 34.7)"
         ]
       },
-      "green-soft": {
+      "kind-role": {
         "role": "primary",
-        "displayName": "Green Wash",
+        "displayName": "Route Blue",
+        "canonical": "#356890",
         "tonalRamp": [
-          "oklch(15% 0.05 160)",
-          "oklch(26% 0.05 160)",
-          "oklch(37% 0.05 160)",
-          "oklch(48% 0.05 160)",
-          "oklch(60% 0.05 160)",
-          "oklch(72% 0.05 160)",
-          "oklch(84% 0.05 160)",
-          "oklch(95% 0.05 160)"
+          "oklch(15% 0.207 264.3)",
+          "oklch(26% 0.207 264.3)",
+          "oklch(37% 0.207 264.3)",
+          "oklch(48% 0.207 264.3)",
+          "oklch(60% 0.207 264.3)",
+          "oklch(71% 0.207 264.3)",
+          "oklch(83% 0.207 264.3)",
+          "oklch(95% 0.207 264.3)"
         ]
       },
-      "paper-dark": {
-        "role": "neutral",
-        "displayName": "Offset Paper (dark)",
-        "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
-        ]
-      },
-      "ink-dark": {
-        "role": "neutral",
-        "displayName": "Ink (dark)",
-        "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
-        ]
-      },
-      "ink-2-dark": {
-        "role": "neutral",
-        "displayName": "Second Ink (dark)",
-        "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
-        ]
-      },
-      "ink-3-dark": {
-        "role": "neutral",
-        "displayName": "Faint Ink (dark)",
-        "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
-        ]
-      },
-      "rule-dark": {
-        "role": "neutral",
-        "displayName": "Hairline (dark)",
-        "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
-        ]
-      },
-      "bar-dark": {
-        "role": "neutral",
-        "displayName": "Bar Grey (dark)",
-        "tonalRamp": [
-          "oklch(15% 0.008 150)",
-          "oklch(26% 0.008 150)",
-          "oklch(37% 0.008 150)",
-          "oklch(48% 0.008 150)",
-          "oklch(60% 0.008 150)",
-          "oklch(72% 0.008 150)",
-          "oklch(84% 0.008 150)",
-          "oklch(95% 0.008 150)"
-        ]
-      },
-      "green-dark": {
+      "kind-case-study": {
         "role": "primary",
-        "displayName": "Pale Sage",
+        "displayName": "Platform Green",
+        "canonical": "#834d7e",
         "tonalRamp": [
-          "oklch(15% 0.05 160)",
-          "oklch(26% 0.05 160)",
-          "oklch(37% 0.05 160)",
-          "oklch(48% 0.05 160)",
-          "oklch(60% 0.05 160)",
-          "oklch(72% 0.05 160)",
-          "oklch(84% 0.05 160)",
-          "oklch(95% 0.05 160)"
+          "oklch(15% 0.135 155.0)",
+          "oklch(26% 0.135 155.0)",
+          "oklch(37% 0.135 155.0)",
+          "oklch(48% 0.135 155.0)",
+          "oklch(60% 0.135 155.0)",
+          "oklch(71% 0.135 155.0)",
+          "oklch(83% 0.135 155.0)",
+          "oklch(95% 0.135 155.0)"
         ]
       },
-      "green-soft-dark": {
+      "kind-note": {
         "role": "primary",
-        "displayName": "Green Wash (dark)",
+        "displayName": "Caution Amber",
+        "canonical": "#b47c2e",
         "tonalRamp": [
-          "oklch(15% 0.05 160)",
-          "oklch(26% 0.05 160)",
-          "oklch(37% 0.05 160)",
-          "oklch(48% 0.05 160)",
-          "oklch(60% 0.05 160)",
-          "oklch(72% 0.05 160)",
-          "oklch(84% 0.05 160)",
-          "oklch(95% 0.05 160)"
+          "oklch(15% 0.155 80.4)",
+          "oklch(26% 0.155 80.4)",
+          "oklch(37% 0.155 80.4)",
+          "oklch(48% 0.155 80.4)",
+          "oklch(60% 0.155 80.4)",
+          "oklch(71% 0.155 80.4)",
+          "oklch(83% 0.155 80.4)",
+          "oklch(95% 0.155 80.4)"
+        ]
+      },
+      "ground-night": {
+        "role": "neutral",
+        "displayName": "Sign Ground (night)",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(37% 0.000 89.9)",
+          "oklch(48% 0.000 89.9)",
+          "oklch(60% 0.000 89.9)",
+          "oklch(71% 0.000 89.9)",
+          "oklch(83% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ]
+      },
+      "ink-night": {
+        "role": "neutral",
+        "displayName": "Sign Black (night)",
+        "canonical": "#ecece8",
+        "tonalRamp": [
+          "oklch(15% 0.005 106.5)",
+          "oklch(26% 0.005 106.5)",
+          "oklch(37% 0.005 106.5)",
+          "oklch(48% 0.005 106.5)",
+          "oklch(60% 0.005 106.5)",
+          "oklch(71% 0.005 106.5)",
+          "oklch(83% 0.005 106.5)",
+          "oklch(95% 0.005 106.5)"
+        ]
+      },
+      "ink-2-night": {
+        "role": "neutral",
+        "displayName": "Graphite (night)",
+        "canonical": "#b6b6b1",
+        "tonalRamp": [
+          "oklch(15% 0.007 106.6)",
+          "oklch(26% 0.007 106.6)",
+          "oklch(37% 0.007 106.6)",
+          "oklch(48% 0.007 106.6)",
+          "oklch(60% 0.007 106.6)",
+          "oklch(71% 0.007 106.6)",
+          "oklch(83% 0.007 106.6)",
+          "oklch(95% 0.007 106.6)"
+        ]
+      },
+      "ink-3-night": {
+        "role": "neutral",
+        "displayName": "Slate (night)",
+        "canonical": "#8f8f8a",
+        "tonalRamp": [
+          "oklch(15% 0.007 106.6)",
+          "oklch(26% 0.007 106.6)",
+          "oklch(37% 0.007 106.6)",
+          "oklch(48% 0.007 106.6)",
+          "oklch(60% 0.007 106.6)",
+          "oklch(71% 0.007 106.6)",
+          "oklch(83% 0.007 106.6)",
+          "oklch(95% 0.007 106.6)"
+        ]
+      },
+      "rule-night": {
+        "role": "neutral",
+        "displayName": "Hairline (night)",
+        "canonical": "#2c2c2b",
+        "tonalRamp": [
+          "oklch(15% 0.002 106.5)",
+          "oklch(26% 0.002 106.5)",
+          "oklch(37% 0.002 106.5)",
+          "oklch(48% 0.002 106.5)",
+          "oklch(60% 0.002 106.5)",
+          "oklch(71% 0.002 106.5)",
+          "oklch(83% 0.002 106.5)",
+          "oklch(95% 0.002 106.5)"
+        ]
+      },
+      "band-night": {
+        "role": "neutral",
+        "displayName": "Sign Band (night)",
+        "canonical": "#ecece8",
+        "tonalRamp": [
+          "oklch(15% 0.005 106.5)",
+          "oklch(26% 0.005 106.5)",
+          "oklch(37% 0.005 106.5)",
+          "oklch(48% 0.005 106.5)",
+          "oklch(60% 0.005 106.5)",
+          "oklch(71% 0.005 106.5)",
+          "oklch(83% 0.005 106.5)",
+          "oklch(95% 0.005 106.5)"
+        ]
+      },
+      "band-ink-night": {
+        "role": "neutral",
+        "displayName": "Band Ink (night)",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(26% 0.000 89.9)",
+          "oklch(37% 0.000 89.9)",
+          "oklch(48% 0.000 89.9)",
+          "oklch(60% 0.000 89.9)",
+          "oklch(71% 0.000 89.9)",
+          "oklch(83% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ]
+      },
+      "band-ink-2-night": {
+        "role": "neutral",
+        "displayName": "Band Grey (night)",
+        "canonical": "#545452",
+        "tonalRamp": [
+          "oklch(15% 0.003 106.5)",
+          "oklch(26% 0.003 106.5)",
+          "oklch(37% 0.003 106.5)",
+          "oklch(48% 0.003 106.5)",
+          "oklch(60% 0.003 106.5)",
+          "oklch(71% 0.003 106.5)",
+          "oklch(83% 0.003 106.5)",
+          "oklch(95% 0.003 106.5)"
+        ]
+      },
+      "kind-project-night": {
+        "role": "primary",
+        "displayName": "Signal Vermilion (night)",
+        "canonical": "#ff6b42",
+        "tonalRamp": [
+          "oklch(15% 0.189 36.2)",
+          "oklch(26% 0.189 36.2)",
+          "oklch(37% 0.189 36.2)",
+          "oklch(48% 0.189 36.2)",
+          "oklch(60% 0.189 36.2)",
+          "oklch(71% 0.189 36.2)",
+          "oklch(83% 0.189 36.2)",
+          "oklch(95% 0.189 36.2)"
+        ]
+      },
+      "kind-role-night": {
+        "role": "primary",
+        "displayName": "Route Blue (night)",
+        "canonical": "#6f98ff",
+        "tonalRamp": [
+          "oklch(15% 0.158 266.1)",
+          "oklch(26% 0.158 266.1)",
+          "oklch(37% 0.158 266.1)",
+          "oklch(48% 0.158 266.1)",
+          "oklch(60% 0.158 266.1)",
+          "oklch(71% 0.158 266.1)",
+          "oklch(83% 0.158 266.1)",
+          "oklch(95% 0.158 266.1)"
+        ]
+      },
+      "kind-case-study-night": {
+        "role": "primary",
+        "displayName": "Platform Green (night)",
+        "canonical": "#35c681",
+        "tonalRamp": [
+          "oklch(15% 0.157 157.4)",
+          "oklch(26% 0.157 157.4)",
+          "oklch(37% 0.157 157.4)",
+          "oklch(48% 0.157 157.4)",
+          "oklch(60% 0.157 157.4)",
+          "oklch(71% 0.157 157.4)",
+          "oklch(83% 0.157 157.4)",
+          "oklch(95% 0.157 157.4)"
+        ]
+      },
+      "kind-note-night": {
+        "role": "primary",
+        "displayName": "Caution Amber (night)",
+        "canonical": "#ffc534",
+        "tonalRamp": [
+          "oklch(15% 0.162 84.9)",
+          "oklch(26% 0.162 84.9)",
+          "oklch(37% 0.162 84.9)",
+          "oklch(48% 0.162 84.9)",
+          "oklch(60% 0.162 84.9)",
+          "oklch(71% 0.162 84.9)",
+          "oklch(83% 0.162 84.9)",
+          "oklch(95% 0.162 84.9)"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Home title page only."
+        "purpose": "Home and Posts index titles; the 404 numeral."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "A Post's title page."
+        "purpose": "Post titles; the morph target of a row title."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "h2 in post bodies."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Numbered section heads, post-body h2, Post entry titles."
+        "purpose": "Every row title."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "A Post's summary above the body."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Post body text at 42rem measure."
-      },
-      "abstract": {
-        "displayName": "Abstract",
-        "purpose": "Abstract and home prose."
+        "purpose": "Post reading text at a 40rem measure."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "All-small-caps labels: running head, hanging labels, metadata."
-      },
-      "caption": {
-        "displayName": "Caption",
-        "purpose": "Figure captions."
+        "purpose": "Dates, side labels, metadata, filters, nav; tabular figures."
       },
       "code": {
         "displayName": "Code",
-        "purpose": "Code blocks only."
+        "purpose": "Code blocks only, ink-only highlighting."
       }
     },
     "shadows": [],
     "motion": [
       {
-        "name": "ease-out-expo",
+        "name": "ease-sign",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Title-page rise (0.9s, 70ms stagger) and view-transition morphs (0.45s)."
+        "purpose": "The single easing for rise, row line, arrow nudge, and view transitions."
       },
       {
-        "name": "state",
-        "value": "0.2s",
-        "purpose": "Link color and underline transitions."
+        "name": "rise",
+        "value": "0.9s, 70ms stagger per step; from opacity 0.001, translateY(0.75rem), blur(4px)",
+        "purpose": "One orchestrated entrance per page, reduced-motion gated."
       },
       {
-        "name": "cite-wash",
-        "value": "0.3s",
-        "purpose": "Reference highlight while its citation is hovered."
+        "name": "row-line",
+        "value": "transform scaleX 0 to 1, 0.6s",
+        "purpose": "Hover/focus draws the Kind's 2px line from the bullet across the row."
+      },
+      {
+        "name": "arrow-nudge",
+        "value": "translateX(0.25rem), 0.4s",
+        "purpose": "Row arrow on hover/focus."
+      },
+      {
+        "name": "title-morph",
+        "value": "view transition group, 0.45s",
+        "purpose": "A row title morphs into the Post headline."
       },
       {
         "name": "reading-progress",
-        "value": "animation-timeline: scroll(root)",
-        "purpose": "2px green hairline at the top of Posts; no JavaScript."
+        "value": "3px fixed bar, scaleX on scroll(root) timeline",
+        "purpose": "Reading progress in the Post's Kind color, no JavaScript."
+      },
+      {
+        "name": "link-underline",
+        "value": "text-decoration-color 0.2s",
+        "purpose": "Underline darkens on hover."
       }
     ],
     "breakpoints": [
@@ -299,118 +450,127 @@
   },
   "components": [
     {
-      "name": "Link",
-      "kind": "custom",
-      "refersTo": "link",
-      "description": "Body link: hairline underline at rest, green on hover.",
-      "html": "<p class=\"ds-p\">Read the <a class=\"ds-link\" href=\"#\">full Post</a> for the method.</p>",
-      "css": ".ds-p{font-family:'Source Serif 4',Georgia,serif;color:var(--ink,#161a17)} .ds-link{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--rule,#d9ddd8);transition:color .2s,text-decoration-color .2s} .ds-link:hover{color:var(--green,#2f5d46);text-decoration-color:currentColor} .ds-link:focus-visible{outline:2px solid var(--green,#2f5d46);outline-offset:3px;border-radius:1px}"
+      "name": "Sign Band",
+      "kind": "nav",
+      "refersTo": "sign-band",
+      "description": "Full-width black header band: name left, Posts and language switch right.",
+      "html": "<nav class=\"ds-band\"><a href=\"#\" class=\"ds-band-name\">Simón Gómez Arango</a><span class=\"ds-band-links\"><a href=\"#\" aria-current=\"page\">Posts</a><a href=\"#\" class=\"ds-band-dim\">Español</a></span></nav>",
+      "css": ":host{--ground:#f5f2e9;--ink:#12201b;--ink-2:#3d4a43;--ink-3:#5c6760;--rule:#d9d6c6;--band:#0e4a3a;--band-ink:#f5f2e9;--band-ink-2:#a8c7b8;--k-project:#9a412b;--k-role:#356890;--k-case-study:#834d7e;--k-note:#b47c2e} .ds-band{font-family: var(--font-sans, 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif);display:flex;align-items:center;justify-content:space-between;height:3.5rem;padding:0 1.5rem;background:var(--band);color:var(--band-ink);font-size:0.9375rem} .ds-band a{color:inherit;text-decoration:none;text-underline-offset:0.4em} .ds-band-name{font-weight:600;letter-spacing:-0.01em} .ds-band-links{display:flex;gap:2rem} .ds-band a:hover{text-decoration:underline} .ds-band a[aria-current]{text-decoration:underline;text-decoration-thickness:2px} .ds-band-dim{color:var(--band-ink-2)!important} .ds-band-dim:hover{color:var(--band-ink)!important} .ds-band a:focus-visible{outline:2px solid currentColor;outline-offset:3px}"
     },
     {
-      "name": "Citation and Reference",
+      "name": "Sign Row",
       "kind": "custom",
-      "refersTo": "citation",
-      "description": "Green [n] marker; hovering washes its reference entry.",
-      "html": "<div class=\"ds-cite-wrap\"><p>Latency fell by 90% <a class=\"ds-cite\" href=\"#r1\">[1]</a>.</p><ol class=\"ds-refs\"><li class=\"ds-ref\" id=\"r1\"><span class=\"ds-n\">[1]</span><span>Simón Gómez Arango. <a href=\"#\"><i>Live chat analysis</i></a>. Project, March 2025.</span></li></ol></div>",
-      "css": ".ds-cite-wrap{font-family:'Source Serif 4',Georgia,serif;color:var(--ink,#161a17)} .ds-cite{color:var(--green,#2f5d46);text-decoration:none;font-variant-numeric:lining-nums;white-space:nowrap} .ds-cite:hover{text-decoration:underline} .ds-cite:focus-visible{outline:2px solid var(--green,#2f5d46);outline-offset:3px} .ds-refs{list-style:none;padding:0;font-size:.95rem} .ds-ref{display:grid;grid-template-columns:2.5rem 1fr;padding:.375rem 0;transition:background-color .3s} .ds-cite-wrap:has(.ds-cite:hover) .ds-ref{background:var(--green-soft,#e3ece6)} .ds-n{color:var(--green,#2f5d46);font-variant-numeric:lining-nums tabular-nums} .ds-ref a{color:inherit}"
+      "refersTo": "sign-row",
+      "description": "The one row schema for every list; hover draws the Kind's line across the row.",
+      "html": "<ol class=\"ds-list\"><li class=\"ds-row\" style=\"--kind:var(--k-project)\"><p class=\"ds-date\">2025</p><span class=\"ds-bullet\"></span><div><h3 class=\"ds-title\"><a href=\"#\">A stock recommender in three Go and Vue services</a><svg class=\"ds-arrow\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M3 10h13M11 4.5 16.5 10 11 15.5\"/></svg></h3><p class=\"ds-sum\">A worker that ingests price data and a Go API that turns trends into calls.</p></div><p class=\"ds-side\">Project</p><span class=\"ds-line\"></span></li></ol>",
+      "css": ":host{--ground:#f5f2e9;--ink:#12201b;--ink-2:#3d4a43;--ink-3:#5c6760;--rule:#d9d6c6;--band:#0e4a3a;--band-ink:#f5f2e9;--band-ink-2:#a8c7b8;--k-project:#9a412b;--k-role:#356890;--k-case-study:#834d7e;--k-note:#b47c2e} .ds-list{font-family: var(--font-sans, 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif);list-style:none;margin:0;padding:0;background:var(--ground);color:var(--ink)} .ds-row{position:relative;display:grid;grid-template-columns:1.875rem 1fr;row-gap:0.25rem;padding:1.25rem 0;border-bottom:1px solid var(--rule)} .ds-date{grid-column:span 2;margin:0;font-size:0.9375rem;color:var(--ink-3);font-variant-numeric:lining-nums tabular-nums} .ds-bullet{width:0.72em;height:0.72em;margin-top:calc((1.25em - 0.72em)/2);font-size:1.3125rem;border-radius:50%;background:var(--kind)} .ds-title{display:flex;justify-content:space-between;gap:0.875rem;margin:0;font-size:1.3125rem;font-weight:600;line-height:1.25;letter-spacing:-0.016em} .ds-title a{color:inherit;text-decoration:none} .ds-title a::after{content:'';position:absolute;inset:0} .ds-title a:focus-visible{outline:none} .ds-row:has(a:focus-visible){outline:2px solid var(--ink);outline-offset:4px} .ds-sum{margin:0.375rem 0 0;max-width:40rem;color:var(--ink-2)} .ds-side{grid-column-start:2;margin:0.25rem 0 0;font-size:0.9375rem;color:var(--ink-3)} .ds-arrow{width:0.85em;height:0.85em;flex:none;margin-top:0.22em;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)} .ds-line{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--kind);transform:scaleX(0);transform-origin:0 50%;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);pointer-events:none} .ds-row:hover .ds-line,.ds-row:focus-within .ds-line{transform:scaleX(1)} .ds-row:hover .ds-arrow,.ds-row:focus-within .ds-arrow{transform:translateX(0.25rem)}"
+    },
+    {
+      "name": "Kind Bullets",
+      "kind": "chip",
+      "refersTo": "kind-bullet",
+      "description": "The four Kind bullets and the hollow ring for rows with no Kind.",
+      "html": "<p class=\"ds-kinds\"><span><i class=\"ds-b\" style=\"background:var(--k-project)\"></i>Project</span><span><i class=\"ds-b\" style=\"background:var(--k-role)\"></i>Role</span><span><i class=\"ds-b\" style=\"background:var(--k-case-study)\"></i>Case study</span><span><i class=\"ds-b\" style=\"background:var(--k-note)\"></i>Note</span><span><i class=\"ds-b ds-ring\"></i>No kind</span></p>",
+      "css": ":host{--ground:#f5f2e9;--ink:#12201b;--ink-2:#3d4a43;--ink-3:#5c6760;--rule:#d9d6c6;--band:#0e4a3a;--band-ink:#f5f2e9;--band-ink-2:#a8c7b8;--k-project:#9a412b;--k-role:#356890;--k-case-study:#834d7e;--k-note:#b47c2e} .ds-kinds{font-family: var(--font-sans, 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif);display:flex;flex-wrap:wrap;gap:1.5rem;margin:0;font-size:0.9375rem;font-weight:600;color:var(--ink)} .ds-kinds span{display:inline-flex;align-items:center;gap:0.5rem} .ds-b{display:inline-block;width:0.72em;height:0.72em;border-radius:50%} .ds-ring{background:transparent;box-shadow:inset 0 0 0 2px var(--ink-3)}"
     },
     {
       "name": "Filter Toggle",
-      "kind": "chip",
+      "kind": "button",
       "refersTo": "filter-toggle",
-      "description": "Bare text toggle; pressed state is green and underlined.",
-      "html": "<p class=\"ds-filters\"><button class=\"ds-filter\" aria-pressed=\"true\">All</button> <button class=\"ds-filter\" aria-pressed=\"false\">Roles</button> <button class=\"ds-filter ds-tag\" aria-pressed=\"false\">Go</button></p>",
-      "css": ".ds-filters{display:flex;gap:1rem;font-family:'Source Serif 4',Georgia,serif;font-size:.95rem} .ds-filter{background:none;border:0;padding:0;font:inherit;cursor:pointer;color:var(--ink-2,#4c544e)} .ds-tag{font-style:italic} .ds-filter:hover{color:var(--green,#2f5d46)} .ds-filter[aria-pressed=true]{color:var(--green,#2f5d46);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px} .ds-filter:focus-visible{outline:2px solid var(--green,#2f5d46);outline-offset:3px}"
+      "description": "Text toggles for Kind and tag filters; pressed is a square ink fill.",
+      "html": "<p class=\"ds-filters\"><button class=\"ds-tg\" aria-pressed=\"true\">All</button><button class=\"ds-tg\" aria-pressed=\"false\"><i class=\"ds-b\" style=\"background:var(--k-project)\"></i>Projects</button><button class=\"ds-tg\" aria-pressed=\"false\"><i class=\"ds-b\" style=\"background:var(--k-role)\"></i>Roles</button><button class=\"ds-tg\" aria-pressed=\"false\">Go</button></p>",
+      "css": ":host{--ground:#f5f2e9;--ink:#12201b;--ink-2:#3d4a43;--ink-3:#5c6760;--rule:#d9d6c6;--band:#0e4a3a;--band-ink:#f5f2e9;--band-ink-2:#a8c7b8;--k-project:#9a412b;--k-role:#356890;--k-case-study:#834d7e;--k-note:#b47c2e} .ds-filters{font-family: var(--font-sans, 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif);display:flex;flex-wrap:wrap;gap:0.375rem 1.25rem;margin:0;font-size:0.9375rem} .ds-tg{display:inline-flex;align-items:center;gap:0.5rem;margin:0 -0.5rem;padding:0.125rem 0.5rem;border:0;border-radius:0;background:none;font:inherit;color:var(--ink-2);cursor:pointer} .ds-tg:hover{color:var(--ink)} .ds-tg[aria-pressed=true]{background:var(--ink);color:var(--ground)} .ds-tg:focus-visible{outline:2px solid currentColor;outline-offset:3px} .ds-b{display:inline-block;width:0.65em;height:0.65em;border-radius:50%}"
     },
     {
-      "name": "Running Head",
-      "kind": "nav",
-      "refersTo": "running-head",
-      "description": "Small-caps line across the page with a hairline below.",
-      "html": "<nav class=\"ds-head\"><a href=\"#\" class=\"ds-home\">Simón Gómez Arango · Preprint</a><span class=\"ds-links\"><a href=\"#\">Posts</a><a href=\"#\">CV</a><a href=\"#\">ES</a></span></nav>",
-      "css": ".ds-head{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;padding:.75rem 0;border-bottom:1px solid var(--rule,#d9ddd8);font-family:'Source Serif 4',Georgia,serif;font-size:.95rem;font-variant-caps:all-small-caps;letter-spacing:.06em;color:var(--ink-3,#6a726c)} .ds-head a{color:inherit;text-decoration:none;transition:color .2s} .ds-head .ds-home{color:var(--ink,#161a17)} .ds-head a:hover{color:var(--green,#2f5d46)} .ds-links{display:flex;gap:1.25rem}"
-    },
-    {
-      "name": "Post Entry",
-      "kind": "custom",
-      "refersTo": "post-entry",
-      "description": "List row between hairlines; title turns green on hover.",
-      "html": "<article class=\"ds-entry\"><h3><a href=\"#\">YouTube live chat analysis</a></h3><p class=\"ds-sum\">A streaming pipeline on Kinesis and Flink.</p><p class=\"ds-meta\"><span class=\"ds-sc\">Project · Mar 2025</span><i> — Python, AWS</i></p></article>",
-      "css": ".ds-entry{position:relative;border-top:1px solid var(--rule,#d9ddd8);padding:1.5rem 0;font-family:'Source Serif 4',Georgia,serif;color:var(--ink,#161a17)} .ds-entry h3{margin:0;font-size:1.375rem;font-weight:600;line-height:1.375;letter-spacing:-.012em} .ds-entry h3 a{color:inherit;text-decoration:none} .ds-entry h3 a::after{content:'';position:absolute;inset:0} .ds-entry:hover h3 a{color:var(--green,#2f5d46)} .ds-sum{margin:.5rem 0 0;color:var(--ink-2,#4c544e)} .ds-meta{margin:.5rem 0 0;font-size:.875rem;color:var(--ink-3,#6a726c)} .ds-sc{font-variant-caps:all-small-caps;letter-spacing:.06em}"
+      "name": "Outbound Links",
+      "kind": "button",
+      "refersTo": "",
+      "description": "Contact links: 600 weight, 2px underline that darkens on hover, up-right arrow.",
+      "html": "<ul class=\"ds-out\"><li><a href=\"#\">Email <svg class=\"ds-arrow\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M5.5 14.5 14.5 5.5M7 5.5h7.5V13\"/></svg></a></li><li><a href=\"#\">LinkedIn <svg class=\"ds-arrow\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M5.5 14.5 14.5 5.5M7 5.5h7.5V13\"/></svg></a></li><li><a href=\"#\">GitHub <svg class=\"ds-arrow\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M5.5 14.5 14.5 5.5M7 5.5h7.5V13\"/></svg></a></li></ul>",
+      "css": ":host{--ground:#f5f2e9;--ink:#12201b;--ink-2:#3d4a43;--ink-3:#5c6760;--rule:#d9d6c6;--band:#0e4a3a;--band-ink:#f5f2e9;--band-ink-2:#a8c7b8;--k-project:#9a412b;--k-role:#356890;--k-case-study:#834d7e;--k-note:#b47c2e} .ds-out{font-family: var(--font-sans, 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif);display:flex;gap:1.75rem;list-style:none;margin:0;padding:0;font-size:1.0625rem;font-weight:600} .ds-out a{display:inline-flex;align-items:center;gap:0.375rem;color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-decoration-thickness:2px;text-underline-offset:0.3em;transition:text-decoration-color 0.2s} .ds-out a:hover{text-decoration-color:currentColor} .ds-out a:focus-visible{outline:2px solid currentColor;outline-offset:3px} .ds-arrow{width:0.85em;height:0.85em}"
     },
     {
       "name": "Section Head",
       "kind": "custom",
-      "refersTo": "section-number",
-      "description": "Numbered section; the green number hangs in the margin column on desktop.",
-      "html": "<h2 class=\"ds-sh\"><span class=\"ds-n\">2</span>Experience</h2>",
-      "css": ".ds-sh{display:flex;align-items:baseline;gap:.75rem;font-family:'Source Serif 4',Georgia,serif;font-size:1.375rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--ink,#161a17)} .ds-sh .ds-n{color:var(--green,#2f5d46);font-variant-numeric:lining-nums tabular-nums;min-width:1.5ch}"
+      "refersTo": "",
+      "description": "A list's head sentence-case at 600 over a 2px ink rule, with an optional quiet link.",
+      "html": "<h2 class=\"ds-head\">Selected work <a href=\"#\">All posts <svg class=\"ds-arrow\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M3 10h13M11 4.5 16.5 10 11 15.5\"/></svg></a></h2>",
+      "css": ":host{--ground:#f5f2e9;--ink:#12201b;--ink-2:#3d4a43;--ink-3:#5c6760;--rule:#d9d6c6;--band:#0e4a3a;--band-ink:#f5f2e9;--band-ink-2:#a8c7b8;--k-project:#9a412b;--k-role:#356890;--k-case-study:#834d7e;--k-note:#b47c2e} .ds-head{font-family: var(--font-sans, 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif);display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0;padding-bottom:0.75rem;border-bottom:2px solid var(--ink);font-size:1.0625rem;font-weight:600;color:var(--ink)} .ds-head a{display:inline-flex;align-items:center;gap:0.375rem;font-size:0.9375rem;font-weight:400;color:var(--ink-2);text-decoration:none} .ds-head a:hover{color:var(--ink)} .ds-head a:focus-visible{outline:2px solid currentColor;outline-offset:3px} .ds-arrow{width:0.85em;height:0.85em}"
     },
     {
-      "name": "Result Figure",
+      "name": "Footer Band",
       "kind": "custom",
-      "description": "To-scale before/after hairline bars between ink rules, with a numbered caption.",
-      "html": "<figure class=\"ds-fig\"><div class=\"ds-rows\"><div class=\"ds-row\"><span>Query latency</span><span class=\"ds-bars\"><i class=\"ds-b\"></i><i class=\"ds-a\" style=\"width:10%\"></i></span><span class=\"ds-v\">−90%</span></div></div><figcaption><b>Figure 1.</b> Results, drawn to scale.</figcaption></figure>",
-      "css": ".ds-fig{margin:0;font-family:'Source Serif 4',Georgia,serif;color:var(--ink,#161a17)} .ds-rows{border-block:1px solid var(--ink,#161a17)} .ds-row{display:grid;grid-template-columns:38% 1fr 7.5rem;gap:1rem;align-items:center;padding:.75rem 0} .ds-bars i{display:block;height:3px} .ds-b{background:var(--bar,#c4cbc5)} .ds-a{margin-top:.375rem;background:var(--green,#2f5d46)} .ds-v{text-align:right;font-variant-numeric:lining-nums tabular-nums} .ds-fig figcaption{margin-top:.75rem;font-size:.875rem;line-height:1.5;color:var(--ink-2,#4c544e)} .ds-fig figcaption b{font-weight:600;color:var(--ink,#161a17)}"
+      "refersTo": "sign-band",
+      "description": "The lit band at the bottom carrying the email at display scale.",
+      "html": "<footer class=\"ds-foot\"><a href=\"#\" class=\"ds-mail\">name@example.com</a><p class=\"ds-fine\"><span>© 2026</span><span>Medellín, Colombia</span></p></footer>",
+      "css": ":host{--ground:#f5f2e9;--ink:#12201b;--ink-2:#3d4a43;--ink-3:#5c6760;--rule:#d9d6c6;--band:#0e4a3a;--band-ink:#f5f2e9;--band-ink-2:#a8c7b8;--k-project:#9a412b;--k-role:#356890;--k-case-study:#834d7e;--k-note:#b47c2e} .ds-foot{font-family: var(--font-sans, 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif);padding:3.5rem 1.5rem 2.5rem;background:var(--band);color:var(--band-ink)} .ds-mail{font-size:clamp(1.375rem,3.3vw,3.25rem);font-weight:600;line-height:1.05;letter-spacing:-0.03em;color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-decoration-color:var(--band-ink-2);text-underline-offset:0.18em} .ds-mail:hover{text-decoration-color:var(--band-ink)} .ds-mail:focus-visible{outline:2px solid currentColor;outline-offset:3px} .ds-fine{display:flex;justify-content:space-between;margin:2.5rem 0 0;padding-top:1.25rem;border-top:1px solid color-mix(in srgb,var(--band-ink-2) 40%,transparent);font-size:0.875rem;color:var(--band-ink-2)}"
     }
   ],
   "narrative": {
-    "northStar": "The Journal Paper",
-    "overview": "**Creative North Star: \"The Journal Paper\"**\n\nThe site is set as a well-typeset engineering paper: offset paper, black-green ink, and one bottle-green second ink. Every page reads like a preprint. A running head runs across the top, a left-aligned title page carries the name, an author line with a superscript affiliation footnote and a correspondence line. A green small-caps ABSTRACT holds `[n]` citations that resolve to a reference list, and numbered figures carry real numbers drawn to scale. Structure comes from typography, hairline rules and a wide left margin column, never from containers.\n\nDensity is that of a journal page. Generous vertical rhythm between numbered sections, tight leading inside reference lists and metadata, and a reading measure held to 42rem. The margin column on the left (10rem on desktop) holds section numbers, hanging labels, dates and the post table of contents, the way a journal's margin holds running labels. Below 64rem the margin column folds into the flow and labels stack above their rows.\n\nMotion is restrained and comes from print logic. The title page rises once on load in a staggered sequence. Post titles morph from list to title page through view transitions. A 2px green hairline tracks reading progress off the scroll timeline. Dark mode is the same paper with the lights off: same roles, values inverted, green lifted to a pale sage.",
+    "northStar": "The Signage Standard",
+    "overview": "The site is a wayfinding system rather than a document or a gallery. A black band runs across the top like the header strip of a transit sign, the page beneath is a near-white sign ground, and every list is a stack of ruled rows on a full-width 12-column grid. One neo-grotesk in two weights does all the talking. The only color anywhere is a small solid bullet that says what kind of thing a row is: a Project, a Role, a Case study, or a Note. You always know where you are, what you are looking at, and where the next arrow goes.\n\nDensity is calm but not sparse: the frame runs to 96rem so a desktop is actually used, display type is set large and tight, and the directory rows carry date, title, summary, and a side label without any container around them. Depth is entirely flat. Hierarchy comes from scale, weight, and the 2px ink rules that head each section.\n\nNight is not a dark theme bolted on; it is the same sign lit up. The band inverts to a pale bar, the ground goes near-black, and the Kind bullets brighten like lamps.",
     "keyCharacteristics": [
-      "Bright offset paper, ink, one green second ink reserved for live things.",
-      "Source Serif 4 for everything except code; small caps for labels, oldstyle figures in prose, tabular lining figures in data.",
-      "Hairline rules (1px) separate everything; heavy ink rules (1px `ink`) open the abstract, Figure 1 and the footer.",
-      "No boxes, no cards, no shadows, no radius.",
-      "A left margin column for numbers and labels, a 42rem main column at reading measure."
+      "Black sign band header and lit footer band; near-white ground between them.",
+      "One grotesk (Host Grotesk) at exactly two weights, 400 and 600; tabular figures for dates.",
+      "Color carries Kind and nothing else: four bullet colors, everything else is ink.",
+      "One row schema for every list: date, bullet with title and summary, side label, arrow.",
+      "Ruled rows, no cards, no shadows, no corners except the round bullet.",
+      "Motion is three things: one staggered rise, a title morph into Posts, a Kind-colored reading bar."
     ],
     "rules": [
       {
-        "name": "The Live Ink Rule",
-        "body": "Green means live: a number you can follow, a link under the pointer, the current filter or section, the hot path. Static decoration never gets green. If an element is not referential or stateful, it is ink.",
+        "name": "The Color Means Kind Rule",
+        "body": "The four Kind colors appear only as a Kind's bullet, its hover line, its reading-progress bar, and its OG-card bullet. Nothing else on the site is colored: not links, not headings, not code, not diagrams, not focus rings. A row with no Kind (education) gets a hollow Slate ring instead of a bullet.",
         "section": "colors"
       },
       {
-        "name": "The Two-Paper Rule",
-        "body": "Light and dark are the same system. Every color is a role variable that swaps under `prefers-color-scheme: dark`; drawn figures embed the same variables so they swap with the page.",
+        "name": "The Ink-Only Code Rule",
+        "body": "Code is highlighted in ink steps only: keywords and function names bold, strings and numbers in Graphite, comments in Slate italic, on a transparent background. Drawn figures follow the same law: a hot path is shown by a heavier stroke (2.5 against 1 to 1.25), never by a hue; auxiliary parts are dashed Hairline.",
         "section": "colors"
       },
       {
-        "name": "The Two Figures Rule",
-        "body": "Prose uses oldstyle proportional figures; anything read as data (dates, periods, section and reference numbers, figure values) uses lining tabular figures.",
+        "name": "The Lit Sign Rule",
+        "body": "In dark mode the band inverts (pale band, dark band text) rather than disappearing into the ground. Every color token switches through `prefers-color-scheme`; nothing is hard-coded to one mode, including the favicon and drawn SVG figures.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Weights Rule",
+        "body": "The grotesk is used at 400 and 600 only. Emphasis is 600; there is no light, medium, or bold. Italic is allowed (figure labels, a lone emphasized caption line) but adds no weight. The mono's 700 exists only for bold keywords in code.",
         "section": "typography"
       },
       {
-        "name": "The One Family Rule",
-        "body": "Source Serif 4 sets every word that is not code. Do not introduce a sans or a second display face.",
+        "name": "The Sentence Case Rule",
+        "body": "All text, including section heads and nav, is sentence case at normal tracking. Hierarchy comes from size and weight, never from uppercase or letterspacing.",
         "section": "typography"
       },
       {
-        "name": "The Printed Page Rule",
-        "body": "Nothing floats. If something needs separation, give it a rule or space; never a shadow, a box or a fill.",
+        "name": "The One Row Rule",
+        "body": "Every list on the site is the same row: date, then bullet with title and summary, then a side label, then an arrow. Narrow rows stack these in a two-column grid (1.875rem bullet track, then content); wide rows lay them out as columns from lg (date 2, title and summary 7, side and arrow 3). New lists use this row; they do not get cards, tiles, or a new schema.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Sign Rule",
+        "body": "Nothing floats. If something needs emphasis, it gets a rule, a weight, or an ink fill, never a shadow or a card.",
         "section": "elevation"
-      },
-      {
-        "name": "The Drawn-On-Paper Rule",
-        "body": "Drawn figures (SVG) sit on the paper with no frame. Raster screenshots, and only those, get a 1px hairline edge.",
-        "section": "shapes"
       }
     ],
     "dos": [
-      "**Do** keep green for live things: numbers you can follow, hover, active state, current section, the hot path.",
-      "**Do** separate with 1px rules and space; open a major block with a 1px `ink` rule.",
-      "**Do** hang numbers and labels in the 10rem margin column, right-aligned, on desktop.",
-      "**Do** use small caps (+0.06em) for labels and lining tabular figures for data.",
-      "**Do** draw figures to scale from the real numbers, and embed the color role variables in SVGs so they follow dark mode.",
-      "**Do** number sections, figures and citations; a reference list closes any page that cites."
+      "Do use the one row schema (date, bullet with title and summary, side, arrow) for any new list.",
+      "Do reserve the four Kind colors for bullets, hover lines, the reading bar, and OG bullets.",
+      "Do set code and drawn figures in ink steps; mark a hot path with a heavier stroke (2.5) and auxiliary parts with dashed Hairline.",
+      "Do keep the grotesk at 400 and 600, sentence case, with tabular figures for dates and periods.",
+      "Do head sections with a 2px ink rule and divide rows with 1px Hairline rules.",
+      "Do keep motion to the staggered rise (0.9s, 70ms steps, from an already-legible state), the title morph (0.45s), and the reading bar, all behind `prefers-reduced-motion`.",
+      "Do let the band invert at night and keep every color, including SVG figures and the favicon, mode-aware.",
+      "Do caption figures with plain text, no figure numbers."
     ],
     "donts": [
-      "**Don't** use boxes, cards, shadows, fills or border-radius on components.",
-      "**Don't** frame drawn SVG figures; only raster screenshots get the hairline edge.",
-      "**Don't** use green as decoration on static content.",
-      "**Don't** introduce a sans, a second display face, or mono outside code.",
-      "**Don't** set text lighter than `ink-3` on paper.",
-      "**Don't** build the dark sidebar-plus-cards developer portfolio this site refuses."
+      "Don't color links, headings, code tokens, diagram nodes, or focus rings; color means Kind.",
+      "Don't add weights beyond 400 and 600, uppercase labels, or tracked-out small caps.",
+      "Don't wrap content in cards, add shadows, or round corners; the bullet is the only round shape.",
+      "Don't use dots for prose list markers; round marks belong to Kind.",
+      "Don't set text lighter than Slate (ink-3); its 5:1 contrast on the ground is the floor.",
+      "Don't add icon glyphs; the drawn arrow is the only icon, in its three directions."
     ]
   }
 }

@@ -1,51 +1,21 @@
 import type { Locale } from './i18n';
 import type { Kind } from './posts';
 
-// A citation segment points at a Post id; the page numbers it by order of first appearance.
-export type Segment = string | { cite: string };
-
 const en = {
   name: 'Simón Gómez Arango',
   siteDescription:
     'Software engineer focused on backend systems and infrastructure. Engineering team lead at RevAIsor.',
-  runningHead: 'Working paper',
   tagline: 'Software Engineer · Backend & Infrastructure',
+  location: 'Medellín, Colombia',
   skip: 'Skip to content',
   nav: { label: 'Site', posts: 'Posts', cv: 'CV', switchTo: 'Español', switchLabel: 'Leer en español' },
   title: 'Building systems that hold up',
-  affiliation: 'Software Engineer and Engineering Team Lead, RevAIsor · Medellín, Colombia',
-  correspondence: 'Correspondence',
-  abstract: 'Abstract',
-  abstractText: [
-    "I'm a software engineer focused on backend systems and the infrastructure they run on. Since January 2024 I've been designing, implementing and deploying RevAIsor's AI governance platform and its services in Java, TypeScript and Go on Google Cloud, and for more than a year I've led its engineering team ",
-    { cite: 'revaisor' },
-    '. That work cut critical endpoint wait times by at least 60%, CI builds from 30 to 7 minutes and database query latency by half (Fig. 1). On my own time I build streaming pipelines on AWS ',
-    { cite: 'youtube-live-chat-analysis' },
-    ' and small distributed systems in Go ',
-    { cite: 'stock-recommender' },
-    '.',
-  ] as Segment[],
-  keywords: 'Keywords',
-  figure: 'Figure',
-  fig1Caption:
-    'Results from my work at RevAIsor, 2024 – present. Each “before” is set to 100 and both bars are drawn to scale.',
-  fig1Rows: [
-    { label: 'Critical endpoint wait time', before: 100, after: 40, note: '≥ 60% shorter' },
-    { label: 'CI/CD build time', before: 30, after: 7, note: '30 → 7 min' },
-    { label: 'Database query latency', before: 100, after: 50, note: '50% lower' },
-    { label: 'Feature delivery time', before: 100, after: 70, note: '30% shorter' },
-  ] as { label: string; before: number; after: number; note: string }[],
-  before: 'Before',
-  after: 'After',
-  sections: { work: 'Selected work', experience: 'Experience', notes: 'Notes', methods: 'Methods', references: 'References' },
-  education: 'B.Sc. Computer Science, EAFIT University, 2025. Full scholarship; GPA 4.19 / 5.0.',
-  methods: [
-    ['Languages', 'Java, Go, Python, TypeScript, SQL'],
-    ['Backend', 'Spring Boot, Node.js, Django, Flask, REST, multi-tenant systems, RabbitMQ'],
-    ['Data', 'MySQL, PostgreSQL, Firestore, CockroachDB'],
-    ['Cloud and delivery', 'Google Cloud, AWS, Docker, serverless, CI/CD'],
-    ['Interfaces', 'Next.js, React, htmx'],
-  ],
+  intro:
+    "I'm a software engineer focused on backend systems and the infrastructure they run on. Since January 2024 I've been designing, implementing and deploying RevAIsor's AI governance platform and its services in Java, TypeScript and Go on Google Cloud, and for more than a year I've led its engineering team. On my own time I build streaming pipelines on AWS and small distributed systems in Go.",
+  email: 'Email',
+  contact: 'Contact',
+  sections: { work: 'Selected work', experience: 'Experience' },
+  education: { title: 'B.Sc. Computer Science', school: 'EAFIT University', note: 'Full scholarship; GPA 4.19 / 5.0.', year: '2025' },
   allPosts: 'All posts',
   kinds: { project: 'Project', 'case-study': 'Case study', role: 'Role', note: 'Note' } as Record<Kind, string>,
   kindsPlural: { project: 'Projects', 'case-study': 'Case studies', role: 'Roles', note: 'Notes' } as Record<Kind, string>,
@@ -57,62 +27,29 @@ const en = {
   noMatch: 'No posts match this filter.',
   clearFilter: 'Clear filter',
   contents: 'Contents',
+  meta: { date: 'Date', period: 'Period', company: 'Company', stack: 'Stack', links: 'Links' },
   code: 'Code',
   video: 'Video',
   demo: 'Demo',
   fallback: '',
-  back: 'Back to the paper',
-  revised: 'Revised',
-  notFound: 'This page is not in the paper.',
-  notFoundBack: 'Return to the first page',
+  notFound: 'Nothing lives at this address.',
+  notFoundBack: 'Go to the home page',
 };
 
 const es: typeof en = {
   ...en,
   siteDescription:
     'Ingeniero de software enfocado en sistemas backend e infraestructura. Líder del equipo de ingeniería en RevAIsor.',
-  runningHead: 'Documento de trabajo',
   tagline: 'Ingeniero de Software · Backend e Infraestructura',
   skip: 'Ir al contenido',
   nav: { label: 'Sitio', posts: 'Publicaciones', cv: 'CV', switchTo: 'English', switchLabel: 'Read in English' },
   title: 'Construyendo sistemas que resisten',
-  affiliation: 'Ingeniero de Software y Líder del Equipo de Ingeniería, RevAIsor · Medellín, Colombia',
-  correspondence: 'Correspondencia',
-  abstract: 'Resumen',
-  abstractText: [
-    'Soy ingeniero de software enfocado en sistemas backend y en la infraestructura sobre la que corren. Desde enero de 2024 diseño, implemento y despliego la plataforma de gobernanza de IA de RevAIsor y sus servicios en Java, TypeScript y Go sobre Google Cloud, y desde hace más de un año lidero su equipo de ingeniería ',
-    { cite: 'revaisor' },
-    '. Ese trabajo redujo los tiempos de espera de endpoints críticos en al menos un 60%, los builds de CI de 30 a 7 minutos y la latencia de consultas a la mitad (Fig. 1). En mi tiempo libre construyo pipelines de streaming en AWS ',
-    { cite: 'youtube-live-chat-analysis' },
-    ' y pequeños sistemas distribuidos en Go ',
-    { cite: 'stock-recommender' },
-    '.',
-  ],
-  keywords: 'Palabras clave',
-  figure: 'Figura',
-  fig1Caption:
-    'Resultados de mi trabajo en RevAIsor, 2024 – actualidad. Cada “antes” equivale a 100 y ambas barras están a escala.',
-  // Same numbers as English; only the words change.
-  fig1Rows: en.fig1Rows.map((r, i) => ({
-    ...r,
-    ...[
-      { label: 'Tiempo de espera de endpoints críticos', note: '≥ 60% menos' },
-      { label: 'Tiempo de build de CI/CD', note: '30 → 7 min' },
-      { label: 'Latencia de consultas a la base de datos', note: '50% menos' },
-      { label: 'Tiempo de entrega de funcionalidades', note: '30% menos' },
-    ][i],
-  })),
-  before: 'Antes',
-  after: 'Después',
-  sections: { work: 'Trabajo seleccionado', experience: 'Experiencia', notes: 'Notas', methods: 'Métodos', references: 'Referencias' },
-  education: 'Pregrado en Ciencias de la Computación, Universidad EAFIT, 2025. Beca completa; promedio 4.19 / 5.0.',
-  methods: [
-    ['Lenguajes', 'Java, Go, Python, TypeScript, SQL'],
-    ['Backend', 'Spring Boot, Node.js, Django, Flask, REST, sistemas multi-tenant, RabbitMQ'],
-    ['Datos', 'MySQL, PostgreSQL, Firestore, CockroachDB'],
-    ['Nube y entrega', 'Google Cloud, AWS, Docker, serverless, CI/CD'],
-    ['Interfaces', 'Next.js, React, htmx'],
-  ],
+  intro:
+    'Soy ingeniero de software enfocado en sistemas backend y en la infraestructura sobre la que corren. Desde enero de 2024 diseño, implemento y despliego la plataforma de gobernanza de IA de RevAIsor y sus servicios en Java, TypeScript y Go sobre Google Cloud, y desde hace más de un año lidero su equipo de ingeniería. En mi tiempo libre construyo pipelines de streaming en AWS y pequeños sistemas distribuidos en Go.',
+  email: 'Correo',
+  contact: 'Contacto',
+  sections: { work: 'Trabajo seleccionado', experience: 'Experiencia' },
+  education: { title: 'Pregrado en Ciencias de la Computación', school: 'Universidad EAFIT', note: 'Beca completa; promedio 4.19 / 5.0.', year: '2025' },
   allPosts: 'Todas las publicaciones',
   kinds: { project: 'Proyecto', 'case-study': 'Caso de estudio', role: 'Rol', note: 'Nota' },
   kindsPlural: { project: 'Proyectos', 'case-study': 'Casos de estudio', role: 'Roles', note: 'Notas' },
@@ -124,14 +61,11 @@ const es: typeof en = {
   noMatch: 'Ninguna publicación coincide con este filtro.',
   clearFilter: 'Quitar filtro',
   contents: 'Contenido',
+  meta: { date: 'Fecha', period: 'Periodo', company: 'Empresa', stack: 'Tecnologías', links: 'Enlaces' },
   code: 'Código',
-  video: 'Video',
-  demo: 'Demo',
   fallback: 'Esta publicación solo está disponible en inglés por ahora.',
-  back: 'Volver al documento',
-  revised: 'Revisado',
-  notFound: 'Esta página no está en el documento.',
-  notFoundBack: 'Volver a la primera página',
+  notFound: 'No hay nada en esta dirección.',
+  notFoundBack: 'Ir al inicio',
 };
 
 export const ui: Record<Locale, typeof en> = { en, es };

@@ -1,180 +1,74 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostEntry from './PostEntry.astro';
+import Arrow from './Arrow.astro';
+import Row from './Row.astro';
 import { getPosts, postHref, hasCv } from '../lib/posts';
-import { formatPeriod, localePrefix, monthYear, type Locale } from '../lib/i18n';
-import { ui, contact, type Segment } from '../lib/ui';
+import { formatPeriod, localePrefix, type Locale } from '../lib/i18n';
+import { ui, contact } from '../lib/ui';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = ui[locale];
 const posts = await getPosts(locale);
-const byId = new Map(posts.map((p) => [p.id, p]));
-
-// Citations are numbered by first appearance in the abstract; a cite to a missing Post is dropped.
-const cited = [...new Set(t.abstractText.flatMap((s) => (typeof s === 'string' ? [] : [s.cite])))].filter((id) => byId.has(id));
-const citeNo = (id: string) => cited.indexOf(id) + 1;
-const abstract: Segment[] = t.abstractText.filter((s) => typeof s === 'string' || byId.has(s.cite));
 
 const featured = posts.filter((p) => p.data.featured);
 const roles = posts
   .filter((p) => p.data.kind === 'role' && p.data.period)
   .sort((a, b) => b.data.period!.start.valueOf() - a.data.period!.start.valueOf());
-const notes = posts.filter((p) => p.data.kind === 'note').slice(0, 3);
-const keywords = ['Java', 'Spring Boot', 'Go', 'TypeScript', 'MySQL', 'RabbitMQ', 'Google Cloud', 'AWS'];
-
-let n = 0;
-const sec = () => ++n;
+const links = [
+  { label: t.email, href: `mailto:${contact.email}` },
+  { label: 'LinkedIn', href: contact.linkedin, rel: 'me' },
+  { label: 'GitHub', href: contact.github, rel: 'me' },
+  ...(hasCv ? [{ label: 'CV', href: '/cv.pdf' }] : []),
+];
 ---
 
 <Base locale={locale}>
-  <div class="paper">
-    <!-- Title page -->
-    <h1 class="rise mt-12 max-w-[15ch] text-[clamp(2.6rem,7vw,5rem)] font-semibold leading-[1.02] tracking-[-0.03em] lg:mt-16" style="--i:0">
-      {t.title}
-    </h1>
+  <div class="wrap">
+    <div class="grid grid-cols-12 gap-x-6 pt-12 sm:pt-16 lg:pt-14">
+      <section class="col-span-12 lg:col-span-7 lg:pr-8" aria-labelledby="title">
+        <h1 id="title" class="rise text-[clamp(2.75rem,6vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.04em]" style="--i:0">{t.title}</h1>
+        <div class="rise mt-8 lg:mt-10" style="--i:1">
+          <p class="text-[1.5rem] font-semibold leading-tight tracking-[-0.015em]">{t.name}</p>
+          <p class="mt-1 text-ink-2">{t.tagline} · {t.location}</p>
+        </div>
+        <p class="rise mt-7 max-w-[38rem] text-[1.125rem] leading-[1.6] text-ink-2" style="--i:2">{t.intro}</p>
+        <ul class="rise mt-6 flex flex-wrap gap-x-7 gap-y-2 text-[1.0625rem] font-semibold" style="--i:3">
+          {links.map((l) => (
+            <li><a href={l.href} rel={l.rel} class="u inline-flex items-center gap-1.5 decoration-2 underline-offset-[0.3em]">{l.label} <Arrow dir="out" /></a></li>
+          ))}
+        </ul>
+      </section>
 
-    <div class="rise mt-7" style="--i:1">
-      <p class="text-[1.375rem] leading-tight">{t.name}<sup class="ml-0.5 text-green">1</sup></p>
-      <p class="mt-2 text-[0.95rem] text-ink-2"><sup class="mr-1 text-green">1</sup>{t.affiliation}</p>
-      <p class="mt-1 text-[0.95rem] text-ink-2 [overflow-wrap:anywhere]">
-        <span class="sc text-ink-3">{t.correspondence}:</span>{' '}
-        <a href={`mailto:${contact.email}`} class="text-ink underline">{contact.email}</a>{' · '}
-        <a href={contact.linkedin} class="text-ink underline" rel="me">LinkedIn</a>{' · '}
-        <a href={contact.github} class="text-ink underline" rel="me">GitHub</a>
-        {hasCv && <>{' · '}<a href="/cv.pdf" class="text-ink underline">CV (PDF)</a></>}
-      </p>
+      {featured.length > 0 && (
+        <section class="rise col-span-12 mt-20 lg:col-span-5 lg:mt-3" style="--i:4" aria-labelledby="s-work">
+          <h2 id="s-work" class="flex items-baseline justify-between gap-4 border-b-2 border-signal pb-3 text-[1.0625rem] font-semibold">
+            {t.sections.work}
+            <a href={`${localePrefix(locale)}/posts/`} class="inline-flex items-center gap-1.5 text-[0.9375rem] font-normal text-ink-2 hover:text-ink">{t.allPosts} <Arrow /></a>
+          </h2>
+          <ol>{featured.map((p) => <PostEntry post={p} locale={locale} morph />)}</ol>
+        </section>
+      )}
     </div>
 
-    <section aria-labelledby="abstract" class="rise wide mt-10 border-t border-ink pt-5 lg:grid lg:grid-cols-[minmax(0,40rem)_minmax(10rem,1fr)] lg:gap-x-10" style="--i:2">
-      <div>
-        <h2 id="abstract" class="sc mb-2 text-[1rem] font-semibold text-green">{t.abstract}</h2>
-        <p class="text-[1.125rem] leading-[1.65] hyphens-auto" lang={locale}>
-          {abstract.map((s) =>
-            typeof s === 'string' ? s : (
-              <a href={`#ref-${s.cite}`} class="cite" data-cite={s.cite} aria-label={`[${citeNo(s.cite)}] ${byId.get(s.cite)!.data.title}`}>[{citeNo(s.cite)}]</a>
-            ),
-          )}
-        </p>
-        <p class="mt-4 text-[0.95rem] text-ink-2"><span class="sc font-semibold text-ink">{t.keywords}:</span> {keywords.join(' · ')}</p>
-      </div>
-      <!-- Margin notes: the abstract's references, beside the text on wide screens. -->
-      <ol class="hidden self-start pt-8 text-[0.8rem] leading-snug text-ink-2 lg:block" aria-hidden="true">
-        {cited.map((id, i) => (
-          <li class="ref mb-3 grid grid-cols-[1.75rem_1fr] rounded-[2px]" data-ref={id}>
-            <span class="tab text-green">[{i + 1}]</span>
-            <a href={postHref(locale, id)} tabindex="-1" class="no-underline">{byId.get(id)!.data.title}</a>
-          </li>
-        ))}
-      </ol>
-    </section>
-
-    <!-- Figure 1: results drawn to scale, bars kept at every width so the caption stays true -->
-    <figure class="rise wide mt-10" style="--i:3" aria-labelledby="fig1-cap">
-      <div class="border-y border-ink">
-        <p class="sc border-b border-rule py-2 text-[0.85rem] text-ink-3" aria-hidden="true">
-          <span class="inline-block h-[3px] w-4 align-middle bg-bar"></span> {t.before}
-          <span class="ml-3 inline-block h-[3px] w-4 align-middle bg-green"></span> {t.after}
-        </p>
-        <dl>
-          {t.fig1Rows.map((r) => (
-            <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-4 border-b border-rule py-3 last:border-0 sm:grid-cols-[38%_1fr_7.5rem]">
-              <dt class="leading-snug">{r.label}</dt>
-              <dd class="order-last col-span-2 mt-2 sm:order-none sm:col-span-1 sm:mt-0 sm:self-center" aria-hidden="true">
-                <div class="h-[3px] w-full bg-bar"></div>
-                <div class="mt-1.5 h-[3px] bg-green" style={`width:${Math.round((r.after / r.before) * 100)}%`}></div>
-              </dd>
-              <dd class="tab whitespace-nowrap text-right">{r.note}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-      <figcaption id="fig1-cap" class="mt-3 max-w-[42rem] text-[0.875rem] leading-normal text-ink-2">
-        <span class="font-semibold text-ink">{t.figure} 1.</span> {t.fig1Caption}
-      </figcaption>
-    </figure>
-
-    {featured.length > 0 && (
-      <section class="section" aria-labelledby="s-work">
-        <h2 id="s-work" class="section-head"><span class="n">{sec()}</span>{t.sections.work}</h2>
-        <div>{featured.map((p) => <PostEntry post={p} locale={locale} morph />)}</div>
-      </section>
-    )}
-
-    <section class="section" aria-labelledby="s-exp">
-      <h2 id="s-exp" class="section-head"><span class="n">{sec()}</span>{t.sections.experience}</h2>
-      <ol class="border-b border-rule">
+    <section class="mt-24 lg:mt-16" aria-labelledby="s-exp">
+      <h2 id="s-exp" class="border-b-2 border-signal pb-3 text-[1.0625rem] font-semibold">{t.sections.experience}</h2>
+      <ol>
         {roles.map((r) => (
-          <li class="row border-t border-rule py-5">
-            <p class="hang tab text-[0.95rem] text-ink-3">{formatPeriod(locale, r.data.period!.start, r.data.period!.end)}</p>
-            <div>
-              <h3 class="text-[1.2rem] font-semibold leading-snug">
-                <a href={postHref(locale, r.id)} class="no-underline" transition:name={featured.includes(r) ? undefined : `title-${r.id}`}>{r.data.title}</a>
-              </h3>
-              <p class="text-ink-2">{r.data.company}. {r.data.summary}</p>
-            </div>
-          </li>
+          <Row
+            wide
+            date={formatPeriod(locale, r.data.period!.start, r.data.period!.end)}
+            title={r.data.title}
+            summary={r.data.summary}
+            side={r.data.company}
+            kind="role"
+            href={postHref(locale, r.id)}
+            morph={featured.includes(r) ? undefined : `title-${r.id}`}
+          />
         ))}
-        <li class="row border-t border-rule py-5">
-          <p class="hang tab text-[0.95rem] text-ink-3">2025</p>
-          <p class="text-ink-2">{t.education}</p>
-        </li>
+        <Row wide date={t.education.year} title={t.education.title} summary={t.education.note} side={t.education.school} />
       </ol>
     </section>
-
-    {notes.length > 0 && (
-      <section class="section" aria-labelledby="s-notes">
-        <h2 id="s-notes" class="section-head"><span class="n">{sec()}</span>{t.sections.notes}</h2>
-        <div>{notes.map((p) => <PostEntry post={p} locale={locale} morph={!p.data.featured} />)}</div>
-      </section>
-    )}
-
-    <section class="section" aria-labelledby="s-methods">
-      <h2 id="s-methods" class="section-head"><span class="n">{sec()}</span>{t.sections.methods}</h2>
-      <dl class="border-b border-rule">
-        {t.methods.map(([k, v]) => (
-          <div class="row border-t border-rule py-3">
-            <dt class="hang sc text-[0.95rem] text-ink-3">{k}</dt>
-            <dd>{v}</dd>
-          </div>
-        ))}
-      </dl>
-    </section>
-
-    {cited.length > 0 && (
-      <section class="section" aria-labelledby="s-refs">
-        <h2 id="s-refs" class="section-head"><span class="n" aria-hidden="true"></span>{t.sections.references}</h2>
-        <ol class="text-[0.95rem] leading-relaxed">
-          {cited.map((id, i) => {
-            const p = byId.get(id)!;
-            return (
-              <li id={`ref-${id}`} class="ref grid grid-cols-[2.5rem_1fr] rounded-[2px] py-1.5">
-                <span class="tab text-green">[{i + 1}]</span>
-                <span>
-                  {t.name}. <a href={postHref(locale, id)} class="italic">{p.data.title}</a>. {t.kinds[p.data.kind]}, {monthYear(locale, p.data.date, 'long')}.
-                </span>
-              </li>
-            );
-          })}
-        </ol>
-        <p class="mt-6"><a href={`${localePrefix(locale)}/posts/`} class="underline">{t.allPosts} →</a></p>
-      </section>
-    )}
   </div>
 </Base>
-
-<script>
-  // Hovering or focusing a citation lights up its reference entries.
-  const wire = () => {
-    document.querySelectorAll<HTMLAnchorElement>('a.cite').forEach((a) => {
-      const refs = document.querySelectorAll(`#ref-${a.dataset.cite}, [data-ref="${a.dataset.cite}"]`);
-      const on = () => refs.forEach((r) => r.classList.add('is-cited'));
-      const off = () => refs.forEach((r) => r.classList.remove('is-cited'));
-      a.addEventListener('pointerenter', on);
-      a.addEventListener('pointerleave', off);
-      a.addEventListener('focus', on);
-      a.addEventListener('blur', off);
-    });
-  };
-  document.addEventListener('astro:page-load', wire);
-</script>

@@ -11,39 +11,37 @@ const t = ui[locale];
 const posts = await getPosts(locale);
 const presentKinds = kinds.filter((k) => posts.some((p) => p.data.kind === k));
 const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort((a, b) => a.localeCompare(b));
-const btn = 'cursor-pointer rounded-[2px] px-1 -mx-1 text-ink-2 hover:text-green aria-pressed:text-green aria-pressed:underline aria-pressed:decoration-1 aria-pressed:underline-offset-4';
+const btn = 'inline-flex cursor-pointer items-center gap-2 px-2 py-0.5 -mx-2 text-ink-2 hover:text-ink aria-pressed:bg-signal aria-pressed:text-ground';
 ---
 
 <Base locale={locale} title={t.postsTitle} description={t.postsIntro}>
-  <div class="paper">
-    <h1 class="rise mt-16 text-[clamp(2.4rem,6vw,4rem)] font-semibold leading-[1.05] tracking-[-0.03em] lg:mt-24">{t.postsTitle}</h1>
-    <p class="rise mt-4 max-w-[38rem] text-[1.125rem] text-ink-2" style="--i:1">{t.postsIntro}</p>
+  <div class="wrap">
+    <div class="grid grid-cols-12 gap-x-6 pt-12 sm:pt-16 lg:pt-24">
+      <h1 class="rise col-span-12 text-[clamp(2.75rem,6.4vw,6rem)] font-semibold leading-[0.98] tracking-[-0.04em] lg:col-span-6">{t.postsTitle}</h1>
+      <p class="rise col-span-12 mt-6 max-w-[34rem] text-[1.125rem] leading-[1.6] text-ink-2 lg:col-span-6 lg:mt-0 lg:self-end" style="--i:1">{t.postsIntro}</p>
+    </div>
 
-    <div class="rise mt-10 space-y-2 text-[0.95rem]" style="--i:2" data-filters>
-      <div class="row">
-        <span class="hang sc text-ink-3">{t.filterKind}</span>
-        <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <button type="button" class={btn} data-kind="" aria-pressed="true">{t.filterAll}</button>
-        {presentKinds.map((k) => <button type="button" class={btn} data-kind={k} aria-pressed="false">{t.kindsPlural[k]}</button>)}
+    <div class="rise mt-14 space-y-3 border-t-2 border-signal pt-5 text-[0.9375rem]" style="--i:2" data-filters>
+      <div class="grid grid-cols-12 items-baseline gap-x-6 gap-y-1">
+        <span class="col-span-12 text-ink-3 sm:col-span-2">{t.filterKind}</span>
+        <p class="col-span-12 flex flex-wrap items-center gap-x-5 gap-y-1.5 sm:col-span-10">
+          <button type="button" class={btn} data-kind="" aria-pressed="true">{t.filterAll}</button>
+          {presentKinds.map((k) => <button type="button" class={btn} data-kind={k} aria-pressed="false"><span class="bullet mt-0! size-[0.65em]" data-kind={k} aria-hidden="true"></span>{t.kindsPlural[k]}</button>)}
         </p>
       </div>
-      <div class="row">
-        <span class="hang sc text-ink-3">{t.filterTag}</span>
-        <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        {tags.map((tag) => <button type="button" class={`${btn} italic`} data-tag={tag} aria-pressed="false">{tag}</button>)}
+      <div class="grid grid-cols-12 items-baseline gap-x-6 gap-y-1">
+        <span class="col-span-12 text-ink-3 sm:col-span-2">{t.filterTag}</span>
+        <p class="col-span-12 flex flex-wrap items-center gap-x-5 gap-y-1.5 sm:col-span-10">
+          {tags.map((tag) => <button type="button" class={`${btn} font-normal`} data-tag={tag} aria-pressed="false">{tag}</button>)}
         </p>
       </div>
     </div>
 
-    <div class="mt-8 border-b border-rule" data-list>
-      {posts.map((p) => (
-        <div data-kind={p.data.kind} data-tags={JSON.stringify(p.data.tags)}>
-          <PostEntry post={p} locale={locale} heading="h2" morph />
-        </div>
-      ))}
-    </div>
+    <ol class="mt-8 border-t border-rule" data-list>
+      {posts.map((p) => <PostEntry post={p} locale={locale} heading="h2" morph wide />)}
+    </ol>
     <p class="mt-8 hidden text-ink-2" data-empty>
-      {t.noMatch} <button type="button" class="cursor-pointer underline hover:text-green" data-clear>{t.clearFilter}</button>
+      {t.noMatch} <button type="button" class="u cursor-pointer underline hover:text-ink" data-clear>{t.clearFilter}</button>
     </p>
   </div>
 </Base>

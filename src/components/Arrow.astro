@@ -1,0 +1,7 @@
+---
+// One drawn arrow for every link in the system: 'right' goes deeper into the site, 'out' leaves it.
+interface Props { dir?: 'right' | 'out' | 'left'; class?: string }
+const { dir = 'right', class: cls = '' } = Astro.props;
+const d = { right: 'M3 10h13M11 4.5 16.5 10 11 15.5', left: 'M17 10H4M9 4.5 3.5 10 9 15.5', out: 'M5.5 14.5 14.5 5.5M7 5.5h7.5V13' }[dir];
+---
+<svg class={`arrow size-[0.85em] flex-none ${cls}`} viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="square" aria-hidden="true"><path d={d} /></svg>
