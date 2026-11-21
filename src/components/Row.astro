@@ -1,0 +1,41 @@
+---
+import Arrow from './Arrow.astro';
+
+// The one sign row every list uses: date · bullet + title + summary · side label · arrow.
+// Wide rows lay those out as columns from lg; narrow rows (and phones) stack them in the same order.
+interface Props {
+  date: string;
+  title: string;
+  summary: string;
+  side?: string;
+  kind?: string;
+  href?: string;
+  morph?: string;
+  heading?: 'h2' | 'h3';
+  wide?: boolean;
+  /** Tag list for the Posts index filters. */
+  tags?: string[];
+}
+const { date, title, summary, side, kind, href, morph, heading: H = 'h3', wide = false, tags } = Astro.props;
+// A title separator never opens a line.
+const label = title.replace(/ · /g, ' · ');
+---
+
+<li class:list={['row grid grid-cols-[1.875rem_1fr] items-start gap-y-1 border-b border-rule py-5', wide && 'lg:grid-cols-12 lg:gap-x-6 lg:py-6']} data-kind={kind} data-tags={tags && JSON.stringify(tags)}>
+  <p class:list={['tab col-span-2 text-[0.9375rem] text-ink-3', wide && 'lg:col-span-2 lg:pt-1 lg:text-base']}>{date}</p>
+  <span class:list={['bullet text-[1.3125rem] leading-[1.25]', wide && 'lg:hidden', !kind && 'ring']} aria-hidden="true"></span>
+  <div class:list={['min-w-0', wide && 'lg:col-span-7']}>
+    <H class:list={['flex items-start gap-3.5 text-[1.3125rem] font-semibold leading-[1.25] tracking-[-0.016em]', !wide && 'justify-between']}>
+      {wide && <span class:list={['bullet hidden lg:inline-block', !kind && 'ring']} aria-hidden="true"></span>}
+      {href ? <a href={href} class="after:absolute after:inset-0" transition:name={morph}>{label}</a> : <span>{label}</span>}
+      {href && !wide && <Arrow class="mt-[0.22em]" />}
+    </H>
+    <p class:list={['mt-1.5 max-w-[40rem] text-ink-2', wide && 'lg:pl-[1.82rem]']}>{summary}</p>
+  </div>
+  {side && (
+    <p class:list={['col-start-2 mt-1 flex items-center gap-2.5 text-[0.9375rem] text-ink-3', wide && 'lg:col-span-3 lg:col-start-auto lg:mt-0 lg:justify-end lg:pt-1 lg:text-base lg:text-ink']}>
+      {side}{href && wide && <Arrow class="hidden text-ink lg:inline" />}
+    </p>
+  )}
+  {href && <span class:list={['line', wide && 'lg:[grid-column:3/-1]']} aria-hidden="true"></span>}
+</li>

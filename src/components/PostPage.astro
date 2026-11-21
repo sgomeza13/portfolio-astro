@@ -4,6 +4,7 @@ import { render } from 'astro:content';
 import type { LocalPost } from '../lib/posts';
 import { formatDate, formatPeriod, localePrefix, type Locale } from '../lib/i18n';
 import { ui } from '../lib/ui';
+import Arrow from './Arrow.astro';
 
 interface Props { post: LocalPost; locale: Locale }
 const { post, locale } = Astro.props;
@@ -11,7 +12,7 @@ const t = ui[locale];
 const { data } = post;
 const { Content, headings } = await render(post.entry);
 const toc = headings.filter((h) => h.depth === 2);
-const home = `${localePrefix(locale)}/`;
+const index = `${localePrefix(locale)}/posts/`;
 const links = [
   ...data.repo.map((url, i) => ({ label: data.repo.length > 1 ? `${t.code} ${i + 1}` : t.code, url })),
   ...(data.demo ? [{ label: t.demo, url: data.demo }] : []),
@@ -19,62 +20,72 @@ const links = [
 ];
 ---
 
-<Base locale={locale} title={data.title} description={data.summary} og={`/og/${post.id}.png`} progress type="article">
-  <article class="paper">
+<Base locale={locale} title={data.title} description={data.summary} og={`/og/${post.id}.png`} progress type="article" kind={data.kind}>
+  <article class="wrap" data-kind={data.kind}>
     <h1
-      class="mt-14 max-w-[22ch] lg:mt-20 text-[clamp(2.2rem,5.5vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.028em]"
+      class="max-w-[22ch] pt-12 text-[clamp(2.5rem,5.6vw,5.25rem)] font-semibold leading-[1] tracking-[-0.038em] sm:pt-16 lg:pt-24"
       transition:name={`title-${post.id}`}
-    >{data.title}</h1>
-    <p class="rise mt-6 text-[1.25rem] leading-tight" style="--i:1">
-      <a href={home} class="no-underline">{t.name}</a>
-    </p>
-    <p class="rise mt-2 text-[0.95rem] text-ink-3" style="--i:1">
-      <span class="sc">{t.kinds[data.kind]}</span>
-      {!data.period && <> · <time datetime={data.date.toISOString()}>{formatDate(locale, data.date)}</time></>}
-      {data.company && <> · {data.company}</>}
-      {data.period && <> · <span class="tab">{formatPeriod(locale, data.period.start, data.period.end)}</span></>}
-    </p>
+    >{data.title.replace(/ · /g, '\u00a0· ')}</h1>
 
     {data.isFallback && locale === 'es' && (
-      <p class="mt-6 border-y border-rule py-3 text-[0.95rem] text-ink-2" lang="es">{t.fallback}</p>
+      <p class="mt-8 max-w-[40rem] bg-band px-4 py-3 text-band-ink" lang="es">{t.fallback}</p>
     )}
 
-    <section class="rise mt-10 border-t border-ink pt-5" style="--i:2" aria-label={t.abstract}>
-      <h2 class="sc mb-2 text-[1rem] font-semibold text-green">{t.abstract}</h2>
-      <p class="text-[1.125rem] leading-[1.65]">{data.summary}</p>
-      {data.tags.length > 0 && (
-        <p class="mt-4 text-[0.95rem] text-ink-2"><span class="sc font-semibold text-ink">{t.keywords}:</span> {data.tags.join(' · ')}</p>
-      )}
-      {links.length > 0 && (
-        <p class="mt-1 text-[0.95rem] text-ink-2">
-          {links.map((l, i) => <>{i > 0 && ' · '}<a href={l.url} class="text-ink underline">{l.label}</a></>)}
-        </p>
-      )}
-    </section>
+    <div class="mt-10 grid grid-cols-12 gap-x-6 border-t-2 border-signal pt-6 lg:mt-14 lg:pt-8">
+      <aside class="rise col-span-12 lg:col-span-3" style="--i:1">
+        <dl class="grid grid-cols-[6.5rem_1fr] gap-x-4 gap-y-2 text-[0.9375rem] lg:grid-cols-1 lg:gap-y-0">
+          <dt class="text-ink-3">{t.filterKind}</dt>
+          <dd class="flex items-start gap-2 font-semibold lg:mb-4"><span class="bullet" aria-hidden="true"></span>{t.kinds[data.kind]}</dd>
+          {data.period ? (<>
+            <dt class="text-ink-3">{t.meta.period}</dt>
+            <dd class="tab lg:mb-4">{formatPeriod(locale, data.period.start, data.period.end)}</dd>
+          </>) : (<>
+            <dt class="text-ink-3">{t.meta.date}</dt>
+            <dd class="lg:mb-4"><time datetime={data.date.toISOString()}>{formatDate(locale, data.date)}</time></dd>
+          </>)}
+          {data.company && (<>
+            <dt class="text-ink-3">{t.meta.company}</dt>
+            <dd class="lg:mb-4">{data.company}</dd>
+          </>)}
+          {data.tags.length > 0 && (<>
+            <dt class="text-ink-3">{t.meta.stack}</dt>
+            <dd class="lg:mb-4">{data.tags.join(', ')}</dd>
+          </>)}
+          {links.length > 0 && (<>
+            <dt class="text-ink-3">{t.meta.links}</dt>
+            <dd class="flex flex-wrap gap-x-4 font-semibold lg:mb-4">
+              {links.map((l) => <a href={l.url} class="u inline-flex items-center gap-1 decoration-2 underline-offset-[0.3em]">{l.label} <Arrow dir="out" /></a>)}
+            </dd>
+          </>)}
+        </dl>
 
-    {toc.length > 1 && (
-      <nav class="margin hidden lg:block lg:row-span-[20]" aria-label={t.contents}>
-        <div class="sticky top-10 mt-10 text-right text-[0.85rem] leading-snug">
-          <p class="sc mb-3 text-ink-3">{t.contents}</p>
-          <ol class="space-y-2">
-            {toc.map((h, i) => (
-              <li><a href={`#${h.slug}`} class="toc-link block no-underline text-ink-2" data-slug={h.slug}><span class="tab mr-1.5 text-ink-3">{i + 1}</span>{h.text}</a></li>
-            ))}
-          </ol>
+        {toc.length > 1 && (
+          <nav class="sticky top-8 mt-8 hidden border-t border-rule pt-5 lg:block" aria-label={t.contents}>
+            <p class="mb-3 text-[0.9375rem] font-semibold">{t.contents}</p>
+            <ol class="space-y-2 text-[0.9375rem] leading-snug">
+              {toc.map((h) => (
+                <li><a href={`#${h.slug}`} class="toc-link flex items-start gap-2 text-ink-2 hover:text-ink" data-slug={h.slug}><span class="bullet" aria-hidden="true"></span>{h.text}</a></li>
+              ))}
+            </ol>
+          </nav>
+        )}
+      </aside>
+
+      <div class="col-span-12 mt-10 lg:col-span-8 lg:col-start-4 lg:mt-0">
+        <p class="rise max-w-[40rem] text-[1.375rem] leading-[1.45] tracking-[-0.01em]" style="--i:2">{data.summary}</p>
+        <div class="body mt-10" lang={data.isFallback ? 'en' : locale}>
+          <Content />
         </div>
-      </nav>
-    )}
-
-    <div class="body mt-10 text-[1.0625rem] leading-[1.7]" lang={data.isFallback ? 'en' : locale}>
-      <Content />
+        <p class="mt-20 border-t-2 border-signal pt-5 font-semibold">
+          <a href={index} class="inline-flex items-center gap-2 hover:underline underline-offset-[0.3em]"><Arrow dir="left" /> {t.allPosts}</a>
+        </p>
+      </div>
     </div>
-
-    <p class="mt-16 border-t border-rule pt-5"><a href={home} class="underline">← {t.back}</a></p>
   </article>
 </Base>
 
 <script>
-  // The section in view turns green in the margin table of contents.
+  // The section in view is marked current in the table of contents.
   const wire = () => {
     const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc-link')];
     if (!links.length) return;
@@ -82,7 +93,7 @@ const links = [
       (entries) => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
-          links.forEach((l) => l.classList.toggle('text-green!', l.dataset.slug === e.target.id));
+          links.forEach((l) => l.setAttribute('aria-current', String(l.dataset.slug === e.target.id)));
         }
       },
       { rootMargin: '0px 0px -70% 0px' },

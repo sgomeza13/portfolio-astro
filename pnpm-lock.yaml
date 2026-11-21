@@ -14,9 +14,9 @@ importers:
       '@astrojs/rss':
         specifier: ^4.0.19
         version: 4.0.19
-      '@fontsource/source-serif-4':
-        specifier: ^5.3.1
-        version: 5.3.1
+      '@fontsource/host-grotesk':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@tailwindcss/vite':
         specifier: ^4.3.5
         version: 4.3.5(vite@8.3.7(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -296,8 +296,8 @@ packages:
   '@emnapi/wasi-threads@1.2.3':
     resolution: {integrity: sha512-ELEBe8PsLvvJ6QMr0zLt8ffvOHW/dc1m3CEzNMg7aJUv3bMaoDtw2TXyDAwkYBuroxxuHEwhRTLJSe5sya547g==}
 
-  '@fontsource/source-serif-4@5.3.1':
-    resolution: {integrity: sha512-cWcTCXjYYrgF9A67fThVir1VSc0lPEYmwQ6jA4pPt01s2MSCi/maINUcZoCzaqnU8fyUReDO97eGcBUkHgOeug==}
+  '@fontsource/host-grotesk@5.3.0':
+    resolution: {integrity: sha512-/4lcEvSbI3IELjz7UHW5Z1tXuRwOJACKK1ynJKSR28/MscudnKjxXIPQYfRmguv4niURtuksL0Hiusx+SPZS8w==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -2515,7 +2515,7 @@ snapshots:
     dependencies:
       tslib: 2.9.1
 
-  '@fontsource/source-serif-4@5.3.1': {}
+  '@fontsource/host-grotesk@5.3.0': {}
 
   '@img/colour@1.1.0': {}
 

@@ -2,9 +2,10 @@
 import { ClientRouter } from 'astro:transitions';
 import { Font } from 'astro:assets';
 import '../styles/global.css';
-import { alternatePath, localePrefix, monthYear, type Locale } from '../lib/i18n';
+import { alternatePath, localePrefix, type Locale } from '../lib/i18n';
 import { ui, contact } from '../lib/ui';
 import { hasCv } from '../lib/posts';
+import Arrow from '../components/Arrow.astro';
 
 interface Props {
   locale: Locale;
@@ -13,23 +14,25 @@ interface Props {
   og?: string;
   progress?: boolean;
   type?: 'website' | 'article';
+  /** A Post's Kind: colors its reading-progress bar. */
+  kind?: string;
 }
 
-const { locale, title, description, og = '/og/default.png', progress = false, type = 'website' } = Astro.props;
+const { locale, title, description, og = '/og/default.png', progress = false, type = 'website', kind } = Astro.props;
 const t = ui[locale];
 const home = `${localePrefix(locale)}/`;
 const other: Locale = locale === 'es' ? 'en' : 'es';
 const pageTitle = title ? `${title} · ${t.name}` : `${t.name} · Software Engineer`;
 const desc = description ?? t.siteDescription;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const revised = monthYear(locale, new Date(), 'long');
+const onPosts = Astro.url.pathname.includes('/posts/');
 // Cloudflare Web Analytics: workers.dev gets no automatic injection, so the beacon is added when a token is set
 // (Cloudflare dashboard → Web Analytics → add site → copy token → set PUBLIC_CF_BEACON_TOKEN in the build env).
 const beacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 ---
 
 <!doctype html>
-<html lang={locale} style={locale === 'es' ? "--fig-label: 'Figura'" : undefined}>
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,8 +43,8 @@ const beacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
     <link rel="alternate" hreflang={other} href={new URL(alternatePath(Astro.url.pathname, other), Astro.site)} />
     <link rel="alternate" type="application/rss+xml" title={t.name} href="/rss.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#fbfbf8" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#121614" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0e4a3a" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#17614c" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title ?? t.name} />
     <meta property="og:description" content={desc} />
@@ -49,25 +52,23 @@ const beacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
     <meta property="og:image" content={new URL(og, Astro.site)} />
     <meta property="og:locale" content={locale === 'es' ? 'es_CO' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
-    <Font cssVariable="--font-serif" preload />
-    <Font cssVariable="--font-mono" />
+    <Font cssVariable="--font-grotesk" preload />
+    <Font cssVariable="--font-code" />
     <ClientRouter />
     {beacon && <script defer is:inline src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: beacon })}></script>}
   </head>
-  <body class="min-h-dvh">
-    {progress && <div class="progress" aria-hidden="true" transition:persist="progress"></div>}
-    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 bg-paper px-2">{t.skip}</a>
+  <body class="flex min-h-dvh flex-col">
+    {progress && <div class="progress" data-kind={kind} aria-hidden="true"></div>}
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 bg-ground px-2 py-1">{t.skip}</a>
 
-    <header class="paper">
-      <nav class="full sc flex items-baseline justify-between gap-4 sm:gap-6 border-b border-rule py-3 text-[0.95rem] text-ink-3" aria-label={t.nav.label}>
-        <a href={home} class="no-underline whitespace-nowrap text-ink">
-          <span class="sm:hidden">{t.name}</span><span class="hidden sm:inline">{t.name} · {t.runningHead}</span>
-        </a>
-        <ul class="flex items-baseline gap-3 sm:gap-5">
-          <li><a href={`${localePrefix(locale)}/posts/`} class="no-underline">{t.nav.posts}</a></li>
-          {hasCv && <li><a href="/cv.pdf" class="no-underline">{t.nav.cv}</a></li>}
+    <header class="bg-band text-band-ink">
+      <nav class="wrap flex h-14 items-center justify-between gap-6 text-[0.9375rem]" aria-label={t.nav.label}>
+        <a href={home} class="whitespace-nowrap font-semibold tracking-[-0.01em]">{t.name}</a>
+        <ul class="flex items-center gap-5 sm:gap-8">
+          <li><a href={`${localePrefix(locale)}/posts/`} class="underline-offset-[0.4em] hover:underline aria-[current]:underline aria-[current]:decoration-2" aria-current={onPosts ? 'page' : undefined}>{t.nav.posts}</a></li>
+          {hasCv && <li><a href="/cv.pdf" class="hover:underline underline-offset-[0.4em]">{t.nav.cv}</a></li>}
           <li>
-            <a href={alternatePath(Astro.url.pathname, other)} hreflang={other} lang={other} class="no-underline" aria-label={t.nav.switchLabel} data-astro-reload>
+            <a href={alternatePath(Astro.url.pathname, other)} hreflang={other} lang={other} class="text-band-ink-2 hover:text-band-ink" aria-label={t.nav.switchLabel} data-astro-reload>
               {t.nav.switchTo}
             </a>
           </li>
@@ -75,23 +76,21 @@ const beacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
       </nav>
     </header>
 
-    <main id="main">
+    <main id="main" class="flex-1">
       <slot />
     </main>
 
-    <footer class="paper mt-28">
-      <div class="full border-t border-ink pt-6 pb-12 grid gap-y-4 gap-x-10 text-[0.875rem] leading-relaxed text-ink-2 lg:grid-cols-[10rem_minmax(0,42rem)_1fr]">
-        <p class="sc text-ink lg:text-right">{t.correspondence}</p>
-        <div>
-          <p class="text-ink [overflow-wrap:anywhere]">
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>{' · '}
-            <a href={contact.linkedin} rel="me">LinkedIn</a>{' · '}
-            <a href={contact.github} rel="me">GitHub</a>{' · '}
-            <a href="/rss.xml">RSS</a>
-          </p>
-          <p class="mt-3">{t.revised} {revised}.</p>
-        </div>
-        <p class="sc lg:text-right lg:whitespace-nowrap">© {new Date().getUTCFullYear()} {t.name}</p>
+    <footer class="mt-24 bg-band text-band-ink lg:mt-32">
+      <div class="wrap flex flex-col-reverse gap-x-8 gap-y-3 py-6 text-[0.9375rem] sm:flex-row sm:items-center sm:justify-between">
+        <h2 class="sr-only">{t.contact}</h2>
+        <p class="text-band-ink-2">© {new Date().getUTCFullYear()} {t.name} · {t.location}</p>
+        <ul class="flex flex-wrap gap-x-6 gap-y-1">
+          <li><a href={`mailto:${contact.email}`} title={contact.email} class="inline-flex items-center gap-1.5 hover:underline underline-offset-[0.3em]">{t.email} <Arrow dir="out" /></a></li>
+          <li><a href={contact.linkedin} rel="me" class="inline-flex items-center gap-1.5 hover:underline underline-offset-[0.3em]">LinkedIn <Arrow dir="out" /></a></li>
+          <li><a href={contact.github} rel="me" class="inline-flex items-center gap-1.5 hover:underline underline-offset-[0.3em]">GitHub <Arrow dir="out" /></a></li>
+          {hasCv && <li><a href="/cv.pdf" class="inline-flex items-center gap-1.5 hover:underline underline-offset-[0.3em]">CV <Arrow dir="out" /></a></li>}
+          <li><a href="/rss.xml" class="inline-flex items-center gap-1.5 hover:underline underline-offset-[0.3em]">RSS <Arrow dir="out" /></a></li>
+        </ul>
       </div>
     </footer>
   </body>

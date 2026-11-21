@@ -1,152 +1,155 @@
 @import 'tailwindcss';
 
-/* Journal Paper: offset paper, ink, and one bottle-green second ink reserved for live things. */
+/* Signage Standard: a warm ivory ground under a highway-green band, one grotesk. Green means the sign itself; the four bullet colors mean Kind. */
 :root {
-  --paper: #fbfbf8;
-  --ink: #161a17;
-  --ink-2: #4c544e; /* secondary text, 7.6:1 on paper */
-  --ink-3: #6a726c; /* captions and metadata, 4.8:1 on paper */
-  --rule: #d9ddd8;
-  --green: #2f5d46; /* 7.4:1 on paper */
-  --green-soft: #e3ece6;
-  --bar: #c4cbc5;
+  --ground: #f5f2e9; /* warm ivory sign ground */
+  --ink: #12201b; /* green-black, 15:1 on ground */
+  --ink-2: #3d4a43; /* secondary text, 8.3:1 on ground */
+  --ink-3: #5c6760; /* metadata, 5.3:1 on ground; the floor for text */
+  --rule: #d9d6c6;
+  --band: #0e4a3a; /* highway green */
+  --band-ink: #f5f2e9;
+  --band-ink-2: #a8c7b8; /* 5.6:1 on band */
+  --signal: #0e4a3a; /* the band's green, carried into section rules, underlines, selection */
+  --k-project: #9a412b; /* deep rust */
+  --k-role: #356890; /* petrol blue */
+  --k-case-study: #834d7e; /* plum */
+  --k-note: #b47c2e; /* ochre */
   color-scheme: light dark;
 }
 
+/* Night: the green sign is lit, the ground goes green-black, and the signal brightens. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #121614;
-    --ink: #e4e8e3;
-    --ink-2: #b3bbb4;
-    --ink-3: #8d968f;
-    --rule: #2b322d;
-    --green: #8fc3a5;
-    --green-soft: #1c2a22;
-    --bar: #3a433c;
+    --ground: #0d1311;
+    --ink: #e9e6dc;
+    --ink-2: #b3bab3;
+    --ink-3: #8a938d;
+    --rule: #26302b;
+    --band: #17614c;
+    --band-ink: #f5f2e9;
+    --band-ink-2: #c2ddd0; /* 5.1:1 on band */
+    --signal: #5cc29a;
+    --k-project: #d77c60;
+    --k-role: #75acd2;
+    --k-case-study: #c590c0;
+    --k-note: #e8bd6d;
   }
 }
 
 @theme inline {
-  --color-paper: var(--paper);
+  --color-ground: var(--ground);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
   --color-rule: var(--rule);
-  --color-green: var(--green);
-  --color-green-soft: var(--green-soft);
-  --color-bar: var(--bar);
-  --font-serif: var(--font-serif), Georgia, serif;
-  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-ink-2: var(--band-ink-2);
+  --color-signal: var(--signal);
+  --font-sans: var(--font-grotesk), 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, monospace;
 }
 
 @layer base {
   html {
-    background: var(--paper);
+    background: var(--ground);
     color: var(--ink);
-    font-family: var(--font-serif);
-    font-size: 17px;
-    line-height: 1.6;
-    font-variant-numeric: oldstyle-nums proportional-nums;
-    text-rendering: optimizeLegibility;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
-    scrollbar-color: var(--bar) transparent;
-    scroll-padding-top: 4rem;
+    scrollbar-color: var(--signal) var(--ground);
+    scroll-padding-top: 2rem;
   }
   @media (min-width: 64rem) {
-    html { font-size: 18px; }
+    html { font-size: 17px; }
   }
-  ::selection { background: var(--green); color: var(--paper); }
-  :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 1px; }
-  a { text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: var(--rule); transition: color 0.2s, text-decoration-color 0.2s; }
-  a:hover { color: var(--green); text-decoration-color: currentColor; }
+  body { background: var(--ground); }
+  ::selection { background: var(--signal); color: var(--ground); }
+  :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  a { text-decoration-thickness: 1px; text-underline-offset: 0.22em; transition: text-decoration-color 0.2s, color 0.2s; }
   h1, h2, h3 { text-wrap: balance; }
   p { text-wrap: pretty; }
 }
 
 @layer components {
-  /* Small caps labels: the paper's section labels, running head and margin notes. */
-  .sc { font-variant-caps: all-small-caps; letter-spacing: 0.06em; font-variant-numeric: lining-nums; }
+  /* The page frame: wide enough that a desktop is used, not centred into a strip. */
+  .wrap { max-width: 96rem; margin-inline: auto; padding-inline: clamp(1.25rem, 3.5vw, 3rem); }
   .tab { font-variant-numeric: lining-nums tabular-nums; }
+  .u { text-decoration-line: underline; text-decoration-color: color-mix(in srgb, var(--signal) 45%, transparent); }
+  .u:hover { text-decoration-color: currentColor; }
 
-  /* The page grid: a margin column for labels and numbers, a main column at reading measure. */
-  .paper { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 2.5rem; max-width: 70rem; margin-inline: auto; padding-inline: 1.25rem; }
-  .paper > * { grid-column: 1; }
-  @media (min-width: 64rem) {
-    .paper { grid-template-columns: 10rem minmax(0, 42rem) minmax(0, 1fr); padding-inline: 2.5rem; }
-    .paper > * { grid-column: 2 / 3; }
-    .paper > .wide { grid-column: 2 / 4; }
-    .paper > .full { grid-column: 1 / 4; }
-    .margin { grid-column: 1; grid-row: span 1; }
+  /* Kind: each one is a line color, carried by a bullet and by the line a row draws on hover. */
+  [data-kind='project'] { --kind: var(--k-project); }
+  [data-kind='role'] { --kind: var(--k-role); }
+  [data-kind='case-study'] { --kind: var(--k-case-study); }
+  [data-kind='note'] { --kind: var(--k-note); }
+  .bullet { flex: none; display: inline-block; width: 0.72em; height: 0.72em; margin-top: calc((1lh - 0.72em) / 2); border-radius: 50%; background: var(--kind, var(--ink)); }
+  .bullet.ring { background: transparent; box-shadow: inset 0 0 0 2px var(--ink-3); }
+
+  /* A sign row. Hovering it draws its Kind's line from the bullet across the row. */
+  .row { position: relative; }
+  .row .line { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--kind, var(--ink)); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+  .row:hover .line, .row:focus-within .line { transform: scaleX(1); }
+  .row .arrow { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .row:hover .arrow, .row:focus-within .arrow { transform: translateX(0.25rem); }
+  .row a:focus-visible { outline: none; }
+  .row:has(a:focus-visible) { outline: 2px solid var(--ink); outline-offset: 4px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .row .line { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
   }
 
-  /* A numbered section: number and label sit in the margin column on desktop. */
-  .section-head { display: flex; align-items: baseline; gap: 0.75rem; margin-top: 4.5rem; margin-bottom: 1.25rem; font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
-  .section-head .n { color: var(--green); font-variant-numeric: lining-nums tabular-nums; min-width: 1.5ch; }
-  @media (max-width: 63.99rem) { .section-head .n:empty { display: none; } }
-  @media (min-width: 64rem) {
-    .section-head { margin-left: -12.5rem; }
-    .section-head .n { width: 10rem; margin-right: 1.75rem; text-align: right; flex: none; }
-  }
-
-  /* A row whose label hangs in the margin column on desktop, like a journal's running labels. */
-  .row { display: grid; gap: 0.15rem; }
-  @media (min-width: 64rem) {
-    .row { display: flex; align-items: baseline; }
-    .hang { flex: none; width: 10rem; margin-left: -12.5rem; margin-right: 2.5rem; text-align: right; }
-  }
-
-  .cite { color: var(--green); text-decoration: none; font-variant-numeric: lining-nums; white-space: nowrap; }
-  .cite:hover { text-decoration: underline; }
-  .ref.is-cited { background: var(--green-soft); }
-  @media (prefers-reduced-motion: no-preference) { .ref { transition: background-color 0.3s; } }
-
-  /* Post body: the paper's own typography rather than a stock prose theme. */
-  .body { counter-reset: h2 fig; }
-  .body > * + * { margin-top: 1.1em; }
-  .body h2 { counter-increment: h2; margin-top: 2.6em; font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
-  .body h2::before { content: counter(h2); color: var(--green); font-variant-numeric: lining-nums tabular-nums; margin-right: 0.75rem; }
-  @media (min-width: 64rem) {
-    .body h2::before { display: inline-block; width: 10rem; margin-left: -12.5rem; margin-right: 2.5rem; text-align: right; }
-  }
-  .body h3 { margin-top: 2em; font-weight: 600; font-style: italic; }
+  /* Post body: grotesk reading text at a measure, with figures and code allowed to run wider. */
+  .body { font-size: 1.125rem; line-height: 1.7; }
+  .body > * { max-width: 40rem; }
+  .body > figure, .body > pre { max-width: none; }
+  .body > * + * { margin-top: 1.15em; }
+  .body h2 { margin-top: 2.6em; font-size: 1.625rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+  .body h3 { margin-top: 2em; font-size: 1.1875rem; font-weight: 600; letter-spacing: -0.01em; }
   .body h2 + *, .body h3 + * { margin-top: 0.6em; }
   .body ul { padding-left: 1.25rem; list-style: none; }
   .body ul > li { position: relative; }
   .body ul > li + li { margin-top: 0.5em; }
-  .body ul > li::before { content: ''; position: absolute; left: -1.1rem; top: 0.72em; width: 0.45rem; height: 1px; background: var(--ink-3); }
+  .body ul > li::before { content: ''; position: absolute; left: -1.25rem; top: calc(0.85em - 1px); width: 0.55rem; height: 2px; background: var(--signal); }
   .body ol { padding-left: 1.5rem; list-style: decimal; }
+  .body ol > li::marker { font-variant-numeric: tabular-nums; color: var(--ink-3); }
   .body strong { font-weight: 600; }
   .body em:only-child { color: var(--ink-3); }
-  .body a { text-decoration-line: underline; }
-  .body code:not(pre code) { font-family: var(--font-mono); font-size: 0.84em; padding: 0.1em 0.3em; background: var(--green-soft); border-radius: 2px; }
-  .body pre { font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.65; padding: 1.25rem 1.5rem; overflow-x: auto; border-block: 1px solid var(--rule); margin-block: 1.75em; }
+  .body a { text-decoration-line: underline; text-decoration-color: var(--signal); }
+  .body a:hover { text-decoration-color: currentColor; }
+  .body code:not(pre code) { font-family: var(--font-mono); font-size: 0.84em; padding: 0.12em 0.32em; background: color-mix(in srgb, var(--ink) 7%, transparent); }
+  .body pre { font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.65; padding: 1.25rem 0; overflow-x: auto; border-block: 1px solid var(--rule); margin-block: 2em; }
   .body pre.astro-code { background-color: transparent !important; }
   @media (prefers-color-scheme: dark) {
     .body pre.astro-code, .body pre.astro-code span { color: var(--shiki-dark) !important; }
   }
-  .body figure { margin-block: 2.25em; }
+  .body figure { margin-block: 2.5em; }
+  .body h2 + figure { margin-top: 1.25em; }
   .body figure img { width: 100%; height: auto; border: 1px solid var(--rule); }
-  /* Drawn figures sit on the paper itself; only screenshots get a hairline edge. */
-  .body figure img[src$='.svg'] { border: 0; }
-  .body figcaption { margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5; color: var(--ink-2); }
-  .body figcaption .fig-n::before { content: var(--fig-label, 'Figure') ' '; }
-  .body figcaption .fig-n { font-weight: 600; color: var(--ink); }
-  .body figcaption .fig-n::after { content: '.'; }
-  .body blockquote { padding-left: 1.25rem; border-left: 1px solid var(--green); color: var(--ink-2); font-style: italic; }
+  /* Drawn figures sit on the ground itself; only screenshots get an edge. */
+  .body figure img[src*='.svg'] { border: 0; }
+  .body figcaption { max-width: 40rem; margin-top: 0.75rem; font-size: 0.9375rem; line-height: 1.5; color: var(--ink-2); }
+  .body blockquote { padding-left: 1.25rem; border-left: 1px solid var(--signal); font-size: 1.25rem; line-height: 1.5; }
   .body hr { border: 0; border-top: 1px solid var(--rule); margin-block: 2.5em; }
+
+  /* The section in view: its entry turns ink and takes the Post's bullet. */
+  .toc-link .bullet { visibility: hidden; }
+  .toc-link[aria-current='true'] { color: var(--ink); }
+  .toc-link[aria-current='true'] .bullet { visibility: visible; }
 }
 
-/* Reading progress: a green hairline driven by the scroll timeline, no JavaScript. */
+/* Reading progress: a bar in the Post's Kind color, driven by the scroll timeline, no JavaScript. */
 @media (prefers-reduced-motion: no-preference) {
-@supports (animation-timeline: scroll()) {
-  .progress { position: fixed; inset: 0 0 auto; height: 2px; background: var(--green); transform-origin: 0 50%; transform: scaleX(0); animation: grow linear both; animation-timeline: scroll(root); z-index: 50; }
-  @keyframes grow { to { transform: scaleX(1); } }
-}
+  @supports (animation-timeline: scroll()) {
+    .progress { position: fixed; inset: 0 0 auto; height: 3px; background: var(--kind, var(--ink)); transform-origin: 0 50%; transform: scaleX(0); animation: grow linear both; animation-timeline: scroll(root); z-index: 50; }
+    @keyframes grow { to { transform: scaleX(1); } }
+  }
 }
 
-/* Title-page entrance: one orchestrated moment, from an already-legible default. */
+/* Entrance: one orchestrated rise, from an already-legible default. */
 @media (prefers-reduced-motion: no-preference) {
   .rise { animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
-  @keyframes rise { from { opacity: 0.001; transform: translateY(0.6rem); filter: blur(3px); } }
+  @keyframes rise { from { opacity: 0.001; transform: translateY(0.75rem); filter: blur(4px); } }
   ::view-transition-group(*) { animation-duration: 0.45s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
 }
